@@ -4,13 +4,45 @@
 {% endblock %}
 
 {% block body %}
-	<div>Accueil</div>
+	<div>
+		<h1>Accueil</h1>
 
-	<a href="{{ path('app_register') }}">Inscription</a>
-	<a href="{{ path('app_login') }}">Connexion</a>
-	{% if app.user %}
-		<a href="{{ path('app_account') }}">Compte</a>
-	{% endif %}
-	<a href="{{path('admin') }}">Administration</a>
+		<a href="{{ path('app_register') }}">Inscription</a>
+		<a href="{{ path('app_login') }}">Connexion</a>
+		{% if app.user %}
+			<a href="{{ path('app_account') }}">Compte</a>
+		{% endif %}
+		<a href="{{path('admin') }}">Administration</a>
 
+		<h2>Affichage des produits</h2>
+
+		<p>Tous les produits</p>
+		{% for product in products %}
+			{% include "include/product.html.twig" %}
+		{% endfor %}
+
+		<br><br>
+		<p>Tous les produits BestSeller</p>
+		{% for product in productBestSeller %}
+			{{ include('include/product.html.twig', {'product': product})}}
+		{% endfor %}
+
+		<br><br>
+		<p>Tous les produits New Arrival</p>
+		{% for product in productNewArrival %}
+			{{ include('include/product.html.twig', {'product': product})}}
+		{% endfor %}
+
+		<br><br>
+		<p>Tous les produits Featured</p>
+		{% for product in productFeatured %}
+			{{ include('include/product.html.twig', {'product': product})}}
+		{% endfor %}
+
+		<br><br>
+		<p>Tous les produits SpecialOffer</p>
+		{% for product in productSpecialOffer %}
+			{{ include('include/product.html.twig', {'product': product})}}
+		{% endfor %}
+	</div>
 {% endblock %}
