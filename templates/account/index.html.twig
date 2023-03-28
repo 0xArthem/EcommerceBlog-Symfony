@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Compte</h1>
+
+		<h2>{{ app.user.email }}</h2>
+
+		<a href="{{ path('app_address_index') }}">Mes adresses</a>
+		<a href="{{ path('app_address_new') }}">Enregister une nouvelle adresse</a>
+	</div>
+{% endblock %}
