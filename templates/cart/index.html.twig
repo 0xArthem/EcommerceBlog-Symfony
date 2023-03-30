@@ -17,10 +17,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% set subTotal = 0 %}
-				{% for element in cart %}
+				{% for element in cart.products %}
 					<tr>
-						{% set subTotal = subTotal + element.quantity * (element.product.price) %}
 						<td>
 							{{ element.product.name }}
 						</td>
@@ -55,7 +53,7 @@
 						Panier total
 					</td>
 					<td>
-						{{ subTotal }}
+						{{ cart.data.subTotalHT }}
 					</td>
 				</tr>
 				<tr>
@@ -63,15 +61,15 @@
 						Taxe (20%)
 					</td>
 					<td>
-						{{ (subTotal * 0.2) | round(2, 'floor') }}
+						{{ cart.data.taxe }}
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Taxe (20%)
+						Total TTC
 					</td>
 					<td>
-						{{ (subTotal * 1.2) | round(2, 'floor') }}
+						{{ cart.data.subTotalTTC }}
 					</td>
 				</tr>
 			</tbody>

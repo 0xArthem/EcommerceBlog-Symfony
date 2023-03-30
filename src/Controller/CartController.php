@@ -22,7 +22,8 @@ class CartController extends AbstractController
     public function index(): Response
     {
         $cart = $this->cartServices->getFullCart();
-        if (!$cart) {
+
+        if (!isset($cart['products'])) {
             return $this->redirectToRoute('app_home');
         }
 
