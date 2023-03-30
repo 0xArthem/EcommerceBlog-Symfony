@@ -63,7 +63,7 @@
 						Taxe (20%)
 					</td>
 					<td>
-						{{ subTotal * 0.2 }}
+						{{ (subTotal * 0.2) | round(2, 'floor') }}
 					</td>
 				</tr>
 				<tr>
@@ -71,7 +71,7 @@
 						Taxe (20%)
 					</td>
 					<td>
-						{{ subTotal * 1.2 }}
+						{{ (subTotal * 1.2) | round(2, 'floor') }}
 					</td>
 				</tr>
 			</tbody>

@@ -1,0 +1,38 @@
+<div class="navbar">
+	<h3>Menu</h3>
+	{% if app.session.get('cartData') %}
+		Nombre d'éléments dans le panier :
+		{% set quantity = 0 %}
+		{% for element in app.session.get('cartData') %}
+			{% set quantity = quantity + element.quantity %}
+		{% endfor %}
+		{{ quantity }}
+		<a href="{{ path('app_cart') }}">Voir le panier</a>
+
+		<br>
+	{% endif %}
+
+	{% if app.session.get('cartData') %}
+		{% set subTotal = 0 %}
+		{% for element in app.session.get('cartData') %}
+			{% set subTotal = subTotal + (element.quantity * element.product.price) %}
+			{{ element.product.name }}
+			-
+			{{ element.product.price }}
+			-
+			{{ element.quantity }}
+			-
+			{{ element.quantity * element.product.price }}
+			/
+			<a href="{{ path('cart_delete', {'id':element.product.id}) }}">
+				Supprimer
+			</a>
+		{% endfor %}
+
+		Prix total HT :
+		{{ subTotal }}
+	{% else %}
+		<p>Panier vide.</p>
+	{% endif %}
+
+</div>

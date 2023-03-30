@@ -62,6 +62,8 @@ class CartServices
     public function updateCart($cart)
     {
         $this->session->set('cart', $cart);
+        /** panier dispo dans la session **/
+        $this->session->set('cartData', $this->getFullCart());
     }
 
     /** récupérer le panier, retourner son contenu */
