@@ -1,11 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!
+{% block title %}Hello CheckoutController!
 {% endblock %}
 
 {% block body %}
 	<div>
-		<h1>Panier</h1>
+		<h1>Checkout</h1>
+		{{ form_start(checkout) }}
+		<h2>Votre adresse</h2>
+		{{ form_widget(checkout.address) | replace({"[spr]" : "<br>"}) | raw }}
+
+		<a href="{{ path('app_address_new') }}">Ajouter une nouvelle adresse</a>
+
+		<h2>Votre transporteur</h2>
+		{{ form_widget(checkout.carrier) | replace({"[spr]" : "<br>"}) | raw }}
+
+		<h2>Informations aditionnelles</h2>
+		{{ form_widget(checkout.information) }}
+
+		{{ form_end(checkout) }}
+
+		<h2>Votre commande</h2>
 		<table>
 			<thead>
 				<tr>
@@ -13,7 +28,6 @@
 					<th>Prix</th>
 					<th>Quantité</th>
 					<th>Total</th>
-					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,21 +40,10 @@
 							{{ element.product.price }}
 						</td>
 						<td>
-							<a href="{{ path('cart_add', {'id':element.product.id}) }}">
-								+
-							</a>
 							{{ element.quantity }}
-							<a href="{{ path('cart_delete', {'id':element.product.id}) }}">
-								-
-							</a>
 						</td>
 						<td>
 							{{ element.quantity * (element.product.price) }}
-						</td>
-						<td>
-							<a href="{{ path('cart_deleteAll', {'id':element.product.id}) }}">
-								Supprimer
-							</a>
 						</td>
 					</tr>
 				{% endfor %}
@@ -75,6 +78,6 @@
 			</tbody>
 		</table>
 
-		<a href="{{ path('app_checkout') }}">Allez au checkout</a>
+		<a type="submit" href="">Payer</a>
 	</div>
 {% endblock %}
