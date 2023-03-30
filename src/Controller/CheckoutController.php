@@ -4,18 +4,25 @@ namespace App\Controller;
 
 use App\Form\CheckoutType;
 use App\Services\CartServices;
+use App\Services\OrderServices;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class CheckoutController extends AbstractController
 {
     private $cartServices;
+    private $session;
+    private $manager;
 
-    public function __construct(CartServices $cartServices)
+    public function __construct(EntityManagerInterface $manager, CartServices $cartServices, SessionInterface $session)
     {
         $this->cartServices = $cartServices;
+        $this->session = $session;
+        $this->manager = $manager;
     }
 
     /**
@@ -48,11 +55,15 @@ class CheckoutController extends AbstractController
     /**
      * @Route("checkout/confirm", name="checkout_confirm")
      */
-    public function confirm(Request $request): Response
+    public function confirm(Request $request, OrderServices $orderServices): Response
     {
         $user = $this->getUser();
 
         $cart = $this->cartServices->getFullCart();
+
+        if (!isset($cart['products'])) {
+            return $this->redirectToRoute('app_home');
+        }
 
         if (!$user->getAddresses()->getValues()) {
             $this->addFlash('checkout_message', 'Veuillez ajouter une adresse à votre compte pour pouvoir continuer.');
@@ -62,12 +73,23 @@ class CheckoutController extends AbstractController
         $form = $this->createForm(CheckoutType::class, null, ['user' => $user]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() || $this->session->get('checkout_data')) {
 
-            $data = $form->getData();
+            if ($this->session->get('checkout_data')) {
+                $data = $this->session->get('checkout_data');
+            } else {
+                $data = $form->getData();
+                $this->session->set('checkout_data', $data);
+            }
+
             $address = $data['address'];
             $carrier = $data['carrier'];
             $information = $data['information'];
+
+            // sauvegarder le panier
+            $cart['checkout'] = $data;
+            $reference = $orderServices->saveCart($cart, $user);
+            dd($reference);
 
             return $this->render('checkout/confirm.html.twig', [
                 'address' => $address,
