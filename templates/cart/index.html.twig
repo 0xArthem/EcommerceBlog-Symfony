@@ -6,5 +6,75 @@
 {% block body %}
 	<div>
 		<h1>Panier</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% set subTotal = 0 %}
+				{% for element in cart %}
+					<tr>
+						{% set subTotal = subTotal + element.quantity * (element.product.price) %}
+						<td>
+							{{ element.product.name }}
+						</td>
+						<td>
+							{{ element.product.price }}
+						</td>
+						<td>
+							<a href="{{ path('cart_add', {'id':element.product.id}) }}">
+								+
+							</a>
+							{{ element.quantity }}
+							<a href="{{ path('cart_delete', {'id':element.product.id}) }}">
+								-
+							</a>
+						</td>
+						<td>
+							{{ element.quantity * (element.product.price) }}
+						</td>
+						<td>
+							<a href="{{ path('cart_deleteAll', {'id':element.product.id}) }}">
+								Supprimer
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						Panier total
+					</td>
+					<td>
+						{{ subTotal }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Taxe (20%)
+					</td>
+					<td>
+						{{ subTotal * 0.2 }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Taxe (20%)
+					</td>
+					<td>
+						{{ subTotal * 1.2 }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 {% endblock %}

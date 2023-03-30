@@ -2,7 +2,7 @@
 	<h4>
 		{{ product.name }}
 
-		<a href="#">
+		<a href="{{ path('cart_add', {'id':product.id}) }}">
 			Ajouter au panier
 		</a>
 	</h4>

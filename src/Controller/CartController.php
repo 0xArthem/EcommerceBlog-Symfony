@@ -29,7 +29,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/add/{id}", name="addToCart")
+     * @Route("/cart/add/{id}", name="cart_add")
      */
     public function addToCart($id): Response
     {
@@ -39,11 +39,21 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/delete/{id}", name="deleteFromCart")
+     * @Route("/cart/delete/{id}", name="cart_delete")
      */
     public function deleteFromCart($id): Response
     {
         $this->cartServices->deleteFromCart($id);
+
+        return $this->redirectToRoute('app_cart');
+    }
+    /**
+     * 
+     * @Route("/cart/deleteAll/{id}", name="cart_deleteAll")
+     */
+    public function deleteAllToCart($id): Response
+    {
+        $this->cartServices->deleteAllToCart($id);
 
         return $this->redirectToRoute('app_cart');
     }
