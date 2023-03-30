@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckoutController!
+{% endblock %}
+
+{% block body %}
+	<div>
+		<div>
+			<h1>Checkout</h1>
+
+			<h2>Votre adresse</h2>
+			{{ address | replace({"[spr]" : "<br>"}) | raw }}
+
+			<h2>Votre transporteur</h2>
+			{{ carrier | replace({"[spr]" : "<br>"}) | raw }}
+
+			<h2>Informations aditionnelles</h2>
+			{% if information %}
+				{{ information | raw }}
+			{% endif %}
+
+
+			<h2>Votre commande</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Produit</th>
+						<th>Prix</th>
+						<th>Quantité</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for element in cart.products %}
+						<tr>
+							<td>
+								{{ element.product.name }}
+							</td>
+							<td>
+								{{ element.product.price }}
+							</td>
+							<td>
+								{{ element.quantity }}
+							</td>
+							<td>
+								{{ element.quantity * (element.product.price) }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							Panier total
+						</td>
+						<td>
+							{{ cart.data.subTotalHT }}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Taxe (20%)
+						</td>
+						<td>
+							{{ cart.data.taxe }}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Livraison
+							{{ carrier.name }}
+						</td>
+						<td>
+							{{ carrier.price / 100 }}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Total TTC
+						</td>
+						<td>
+							{{ cart.data.subTotalTTC + (carrier.price / 100) }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<button class="submit">
+				Payer
+				{{ cart.data.subTotalTTC + (carrier.price / 100) }}
+				&euro;
+			</button>
+
+		</div>
+	</div>
+{% endblock %}

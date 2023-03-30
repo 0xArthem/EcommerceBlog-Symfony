@@ -6,7 +6,8 @@
 {% block body %}
 	<div>
 		<h1>Checkout</h1>
-		{{ form_start(checkout) }}
+		{{ form_start(checkout, {'action': path('checkout_confirm')}) }}
+
 		<h2>Votre adresse</h2>
 		{{ form_widget(checkout.address) | replace({"[spr]" : "<br>"}) | raw }}
 
@@ -17,8 +18,6 @@
 
 		<h2>Informations aditionnelles</h2>
 		{{ form_widget(checkout.information) }}
-
-		{{ form_end(checkout) }}
 
 		<h2>Votre commande</h2>
 		<table>
@@ -78,6 +77,8 @@
 			</tbody>
 		</table>
 
-		<a type="submit" href="">Payer</a>
+		<button type="submit">Envoyer</button>
+		{{ form_end(checkout) }}
+
 	</div>
 {% endblock %}
