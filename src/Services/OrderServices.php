@@ -25,14 +25,14 @@ class OrderServices
         $order = new Order();
         $order->setReference($cart->getReference())
             ->setCarrierName($cart->getCarrierName())
-            ->setCarrierPrice($cart->getCarrierPrice())
+            ->setCarrierPrice($cart->getCarrierPrice() / 100)
             ->setFullName($cart->getFullName())
             ->setDeliveryAddress($cart->getDeliveryAddress())
             ->setMoreInformations($cart->getMoreInformations())
             ->setQuantity($cart->getQuantity())
-            ->setSubtotalHT($cart->getSubtotalHT())
-            ->setTaxe($cart->getTaxe())
-            ->setSubTotalTTC($cart->getSubtotalTTC())
+            ->setSubtotalHT($cart->getSubtotalHT() / 100)
+            ->setTaxe($cart->getTaxe() / 100)
+            ->setSubTotalTTC($cart->getSubtotalTTC() / 100)
             ->setUser($cart->getUser())
             ->setCreatedAt($cart->getCreatedAt());
         $this->manager->persist($order);
@@ -41,7 +41,7 @@ class OrderServices
 
         foreach ($products as $cart_product) {
             $orderDetails =  new OrderDetails();
-            $productPrice = $cart_product->getProductPrice();
+            $productPrice = $cart_product->getProductPrice() / 100;
             $priceInCents = intval($productPrice * 100);
 
             $orderDetails->setOrders($order)
@@ -51,9 +51,9 @@ class OrderServices
                 // ->setProductPrice($productPrice)
                 // ->setProductPrice($cart_product->getProductPrice())
                 ->setQuantity($cart_product->getQuantity())
-                ->setSubTotalHT($cart_product->getSubtotalHT())
-                ->setSubTotalTTC($cart_product->getSubtotalTTC())
-                ->setTaxe($cart_product->getTaxe());
+                ->setSubTotalHT($cart_product->getSubtotalHT() / 100)
+                ->setSubTotalTTC($cart_product->getSubtotalTTC() / 100)
+                ->setTaxe($cart_product->getTaxe() / 100);
             $this->manager->persist($orderDetails);
         }
 
@@ -88,7 +88,7 @@ class OrderServices
         $line_items[] = [
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $cart->getTaxe() * 100,
+                'unit_amount' => $cart->getTaxe(),
                 'product_data' => [
                     'name' => 'TVA (20%)',
                 ],
@@ -100,7 +100,7 @@ class OrderServices
         $line_items[] = [
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $cart->getCarrierPrice() * 100,
+                'unit_amount' => $cart->getCarrierPrice(),
                 'product_data' => [
                     'name' => $cart->getCarrierName(),
                 ],
