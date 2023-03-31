@@ -92,6 +92,11 @@ class Order
      */
     private $subTotalTTC;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stripeCheckoutSessionId;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
@@ -285,6 +290,18 @@ class Order
     public function setSubTotalTTC(float $subTotalTTC): self
     {
         $this->subTotalTTC = $subTotalTTC;
+
+        return $this;
+    }
+
+    public function getStripeCheckoutSessionId(): ?string
+    {
+        return $this->stripeCheckoutSessionId;
+    }
+
+    public function setStripeCheckoutSessionId(?string $stripeCheckoutSessionId): self
+    {
+        $this->stripeCheckoutSessionId = $stripeCheckoutSessionId;
 
         return $this;
     }

@@ -3,6 +3,10 @@
 {% block title %}Hello CheckoutController!
 {% endblock %}
 
+{% block scriptStripe %}
+	<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 {% block body %}
 	<div>
 		<div>
@@ -87,12 +91,34 @@
 				</tbody>
 			</table>
 
-			<button class="submit">
-				Payer
-				{{ cart.data.subTotalTTC + (carrier.price / 100) }}
-				&euro;
-			</button>
+			{# <form action="{{ path('create-checkout-session') }}" method="POST" enctype="multipart/form-data"> #}
+			<button type="submit" id="checkout-button">Checkout</button>
+			{# </form> #}
 
 		</div>
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script type="text/javascript">
+		// Configure Stripe.js with your Stripe public key
+const stripe = Stripe('pk_test_51M3KrLJysBhvIGnl9JsLhE5V0eubXBkX9vZ11GzHuTVAskSv675viNunsTvfpJP2tZazPEoG3Kk8VqNyaxqb9pGx00RQwpSuVY');
+
+const checkoutButton = document.getElementById('checkout-button');
+
+checkoutButton.addEventListener('click', function () {
+fetch("/create-checkout-session/{{ reference }}", {method: "POST"}).then(function (response) {
+return response.json();
+}).then(function (session) {
+return stripe.redirectToCheckout({sessionId: session.id});
+}).then(function (result) {
+if (result.error) {
+alert(result.error.message);
+}
+}).catch(function (error) {
+console.error('Error : ', error);
+})
+})
+	</script>
 {% endblock %}

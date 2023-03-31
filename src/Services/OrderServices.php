@@ -7,14 +7,17 @@ use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\CartDetails;
 use App\Entity\OrderDetails;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class OrderServices
 {
     private $manager;
-    public function __construct(EntityManagerInterface $manager)
+    private $repoProduct;
+    public function __construct(EntityManagerInterface $manager, ProductRepository $repoProduct)
     {
         $this->manager = $manager;
+        $this->repoProduct = $repoProduct;
     }
 
     public function createOrder($cart)
@@ -38,10 +41,15 @@ class OrderServices
 
         foreach ($products as $cart_product) {
             $orderDetails =  new OrderDetails();
+            $productPrice = $cart_product->getProductPrice();
+            $priceInCents = intval($productPrice * 100);
+
             $orderDetails->setOrders($order)
                 ->setOrders($order)
                 ->setProductName($cart_product->getProductName())
-                ->setProductPrice($cart_product->getProductPrice())
+                ->setProductPrice($productPrice)
+                // ->setProductPrice($productPrice)
+                // ->setProductPrice($cart_product->getProductPrice())
                 ->setQuantity($cart_product->getQuantity())
                 ->setSubTotalHT($cart_product->getSubtotalHT())
                 ->setSubTotalTTC($cart_product->getSubtotalTTC())
@@ -52,6 +60,55 @@ class OrderServices
         $this->manager->flush();
 
         return $order;
+    }
+
+    public function getLineItems($cart)
+    {
+        $cartDetails = $cart->getCartDetails();
+
+        $line_items = [];
+        foreach ($cartDetails as $details) {
+            $product = $this->repoProduct->findOneByName($details->getProductName());
+
+            $priceInCents = number_format($product->getPrice(), 2, '.', '') * 100;
+
+            $line_items[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => $priceInCents,
+                    'product_data' => [
+                        'name' => $product->getName(),
+                    ],
+                ],
+                'quantity' => $details->getQuantity(),
+            ];
+        }
+
+        // taxe
+        $line_items[] = [
+            'price_data' => [
+                'currency' => 'eur',
+                'unit_amount' => $cart->getTaxe() * 100,
+                'product_data' => [
+                    'name' => 'TVA (20%)',
+                ],
+            ],
+            'quantity' => 1,
+        ];
+
+        // transporteur
+        $line_items[] = [
+            'price_data' => [
+                'currency' => 'eur',
+                'unit_amount' => $cart->getCarrierPrice() * 100,
+                'product_data' => [
+                    'name' => $cart->getCarrierName(),
+                ],
+            ],
+            'quantity' => 1,
+        ];
+
+        return $line_items;
     }
 
     public function saveCart($data, $user)

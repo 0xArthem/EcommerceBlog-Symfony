@@ -89,13 +89,14 @@ class CheckoutController extends AbstractController
             // sauvegarder le panier
             $cart['checkout'] = $data;
             $reference = $orderServices->saveCart($cart, $user);
-            dd($reference);
+            // dd($reference);
 
             return $this->render('checkout/confirm.html.twig', [
                 'address' => $address,
                 'carrier' => $carrier,
                 'information' => $information,
                 'cart' => $cart,
+                'reference' => $reference,
                 'checkout' => $form->createView(),
             ]);
         }
