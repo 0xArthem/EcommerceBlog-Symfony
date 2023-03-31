@@ -14,6 +14,10 @@
 		{% endif %}
 		<a href="{{path('admin') }}">Administration</a>
 		<a href="{{path('app_cart') }}">Panier</a>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{path('admin') }}" target="_BLANK">Administration</a>
+		{% endif %}
+
 
 		<h2>Affichage des produits</h2>
 
