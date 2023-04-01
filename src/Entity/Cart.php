@@ -47,11 +47,6 @@ class Cart
     private $deliveryAddress;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPaid = false;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $moreInformations;
@@ -164,18 +159,6 @@ class Cart
     public function setDeliveryAddress(string $deliveryAddress): self
     {
         $this->deliveryAddress = $deliveryAddress;
-
-        return $this;
-    }
-
-    public function isIsPaid(): ?bool
-    {
-        return $this->isPaid;
-    }
-
-    public function setIsPaid(bool $isPaid): self
-    {
-        $this->isPaid = $isPaid;
 
         return $this;
     }

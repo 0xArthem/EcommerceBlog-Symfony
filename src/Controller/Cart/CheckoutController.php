@@ -53,9 +53,9 @@ class CheckoutController extends AbstractController
         ]);
     }
     /**
-     * @Route("checkout/confirm", name="checkout_confirm")
+     * @Route("/checkout/confirm", name="checkout_confirm")
      */
-    public function confirm(Request $request, OrderServices $orderServices): Response
+    public function confirm(Request $request, OrderServices $orderServices, SessionInterface $session): Response
     {
         $user = $this->getUser();
 
@@ -88,8 +88,11 @@ class CheckoutController extends AbstractController
 
             // sauvegarder le panier
             $cart['checkout'] = $data;
-            $reference = $orderServices->saveCart($cart, $user);
+            $reference = $orderServices->saveCart($cart, $user, $session);
+
             // dd($reference);
+            // dd($cart);
+
 
             return $this->render('checkout/confirm.html.twig', [
                 'address' => $address,

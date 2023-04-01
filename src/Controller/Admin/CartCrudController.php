@@ -42,7 +42,6 @@ class CartCrudController extends AbstractCrudController
             TextareaField::new('deliveryAddress')->hideOnIndex()->setLabel('Adresse de livraison'),
             TextareaField::new('moreInformations')->hideOnIndex()->setLabel('Informations supplémentaires'),
             DateTimeField::new('createdAt')->setLabel('Date de création')->setFormTypeOption('disabled', true),
-            BooleanField::new('isPaid')->setLabel('Payé'),
             IntegerField::new('quantity')->setLabel('Quantité'),
             MoneyField::new('subTotalHT')->setCurrency('EUR')->hideOnIndex()->setLabel('Total HT'),
             MoneyField::new('taxe')->setCurrency('EUR')->hideOnIndex()->setLabel('Taxe - TVA 20%'),

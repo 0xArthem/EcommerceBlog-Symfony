@@ -7,8 +7,10 @@ use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\CartDetails;
 use App\Entity\OrderDetails;
+use App\Services\CartServices;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OrderServices
 {
@@ -41,15 +43,13 @@ class OrderServices
 
         foreach ($products as $cart_product) {
             $orderDetails =  new OrderDetails();
+
             $productPrice = $cart_product->getProductPrice() / 100;
             $priceInCents = intval($productPrice * 100);
 
             $orderDetails->setOrders($order)
-                ->setOrders($order)
                 ->setProductName($cart_product->getProductName())
                 ->setProductPrice($productPrice)
-                // ->setProductPrice($productPrice)
-                // ->setProductPrice($cart_product->getProductPrice())
                 ->setQuantity($cart_product->getQuantity())
                 ->setSubTotalHT($cart_product->getSubtotalHT() / 100)
                 ->setSubTotalTTC($cart_product->getSubtotalTTC() / 100)
@@ -111,9 +111,12 @@ class OrderServices
         return $line_items;
     }
 
-    public function saveCart($data, $user)
+    public function saveCart($data, $user, SessionInterface $session)
     {
+        $session->clear();
+
         $cart = new Cart();
+
         $reference = $this->generateUuid();
         $address = $data['checkout']['address'];
         $carrier = $data['checkout']['carrier'];
