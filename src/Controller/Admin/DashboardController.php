@@ -19,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -27,31 +28,45 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return parent::index();
+        // return parent::index();
+        $routeBuilder = $this->get(AdminUrlGenerator::class);
+
+        return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ecommerce Starter');
+            ->setTitle('Administration');
     }
 
     public function configureMenuItems(): iterable
-    {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Adresse', 'fas fa-list', Address::class);
-        yield MenuItem::linkToCrud('Categories', 'fas fa-list', Categories::class);
-        yield MenuItem::linkToCrud('Produit', 'fas fa-list', Product::class);
-        yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);
-        yield MenuItem::linkToCrud('Avis', 'fas fa-list', ReviewsProduct::class);
-        yield MenuItem::linkToCrud('Tag', 'fas fa-list', TagsProduct::class);
-        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Transporteur', 'fas fa-list', Carrier::class);
+        {
+            yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+            
+            yield MenuItem::subMenu('Produits', 'fas fa-boxes')->setSubItems([
+                MenuItem::linkToCrud('Produits', 'fas fa-boxes', Product::class),
+                MenuItem::linkToCrud('Catégories', 'fas fa-folder', Categories::class),
+                MenuItem::linkToCrud('Avis', 'fas fa-star', ReviewsProduct::class)
+            ]);
+            
+            yield MenuItem::subMenu('Commandes', 'fas fa-shopping-cart')->setSubItems([
+                MenuItem::linkToCrud('Commandes', 'fas fa-shopping-cart', Order::class),
+                MenuItem::linkToCrud('Détails de commande', 'fas fa-info-circle', OrderDetails::class),
+                MenuItem::linkToCrud('Transporteurs', 'fas fa-truck', Carrier::class)
+            ]);
 
-        yield MenuItem::linkToCrud('Order', 'fas fa-list', Order::class);
-        yield MenuItem::linkToCrud('OrderDetails', 'fas fa-list', OrderDetails::class);
-        yield MenuItem::linkToCrud('Cart', 'fas fa-list', Cart::class);
-        yield MenuItem::linkToCrud('CartDetails', 'fas fa-list', CartDetails::class);
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
-    }
+            yield MenuItem::subMenu('Paniers', 'fas fa-shopping-basket')->setSubItems([
+                MenuItem::linkToCrud('Paniers', 'fas fa-shopping-basket', Cart::class),
+                MenuItem::linkToCrud('Détails de panier', 'fas fa-info-circle', CartDetails::class),
+            ]);
+
+            yield MenuItem::subMenu('Utilisateurs', 'fas fa-users')->setSubItems([
+                MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class),
+                MenuItem::linkToCrud('Adresse', 'fas fa-map-marker-alt', Address::class)
+            ]);            
+
+            // yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);
+            // yield MenuItem::linkToCrud('Tag', 'fas fa-list', TagsProduct::class);
+        }
 }

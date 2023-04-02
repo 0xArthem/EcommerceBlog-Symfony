@@ -84,6 +84,11 @@ class Product
      */
     private $reviewsProducts;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
