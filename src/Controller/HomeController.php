@@ -2,21 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasyCorp\Bundle\EasyAdminBundle\Contracts\Orm\EntityPaginatorInterface;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ProductRepository $repoProduct): Response
+    public function index(ProductRepository $repoProduct, PaginatorInterface $paginator, Request $request): Response
     {
-
-        $products = $repoProduct->findAll();
+        $query = $repoProduct->findAll();
+        $products = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            12
+        );
 
         $productBestSeller = $repoProduct->findByIsBestSeller(1);
         $productNewArrival = $repoProduct->findByIsNewArrival(1);
