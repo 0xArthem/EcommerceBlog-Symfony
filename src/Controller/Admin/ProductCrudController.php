@@ -33,6 +33,7 @@ class ProductCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
+            BooleanField::new('isActive')->setLabel('Actif'),
             ImageField::new('image')->setBasePath('/assets/images/')
                 ->setUploadDir('./public/assets/images/')
                 ->setRequired(false)

@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $repoProduct, CategoriesRepository $categoriesRepository , PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $repoProduct->findAll();
+        $query = $repoProduct->findBy(array('isActive' => true), array('id' => 'DESC'));
         $products = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -30,10 +30,22 @@ class HomeController extends AbstractController
 
         $categories = $categoriesRepository->findAll();
 
-        $productBestSeller = $repoProduct->findByIsBestSeller(1);
-        $productNewArrival = $repoProduct->findByIsNewArrival(1);
-        $productFeatured = $repoProduct->findByIsFeatured(1);
-        $productSpecialOffer = $repoProduct->findByIsSpecialOffer(1);
+        $productBestSeller = $repoProduct->findBy([
+            'isBestSeller' => true,
+            'isActive' => true
+        ]);
+        $productNewArrival = $repoProduct->findBy([
+            'isNewArrival' => true,
+            'isActive' => true
+        ]);
+        $productFeatured = $repoProduct->findBy([
+            'isFeatured' => true,
+            'isActive' => true
+        ]);
+        $productSpecialOffer = $repoProduct->findBy([
+            'isSpecialOffer' => true,
+            'isActive' => true
+        ]);
 
         return $this->render('home/index.html.twig', [
             'products' => $products,

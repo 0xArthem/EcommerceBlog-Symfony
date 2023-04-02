@@ -89,6 +89,11 @@ class Product
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive = true;
+
     public function __toString()
     {
         return $this->name;
@@ -148,12 +153,20 @@ class Product
         return $this->price;
     }
 
-    public function setPrice(?float $price): self
+    // public function setPrice(?float $price): self
+    // {
+    //     $this->price = $price;
+
+    //     return $this;
+    // }
+
+    public function setPrice(float $price): self
     {
-        $this->price = $price;
+        $this->price = $price / 100;
 
         return $this;
     }
+
 
     public function isIsBestSeller(): ?bool
     {
@@ -334,6 +347,18 @@ class Product
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

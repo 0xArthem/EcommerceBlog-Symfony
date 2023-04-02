@@ -31,6 +31,7 @@ class AddressCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
+            AssociationField::new('user')->setLabel('Utilisateur'),
             TextField::new('fullName')->setLabel('Nom de l\'adresse'),
             TextEditorField::new('address')->setLabel('Adresse'),
             TextField::new('complement')->setLabel('Complément'),
@@ -39,7 +40,6 @@ class AddressCrudController extends AbstractCrudController
             TextField::new('city')->setLabel('Ville'),
             IntegerField::new('codePostal')->setLabel('Code postal'),
             TextField::new('country')->setLabel('Pays'),
-            AssociationField::new('user')->setLabel('Utilisateur'),
         ];
     }
 }
