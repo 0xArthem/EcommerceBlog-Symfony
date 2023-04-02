@@ -50,6 +50,12 @@
 			{{ product.moreInformations|raw }}
 		</p>
 		<p>{{ product.price }}&euro;</p>
+		{% if product.lastPrice %}
+			<p style="text-decoration: line-through;">{{ product.lastPrice }}&euro;</p>
+			{% set discountPercent = ((product.lastPrice - product.price) / product.lastPrice * 100) %}
+			<p>{{ discountPercent|round(0) }}% de réduction !</p>
+		{% endif %}
+
 
 		{% if product.image %}
 			<img src="/assets/images/{{ product.image }}" alt="{{ product.name }}">

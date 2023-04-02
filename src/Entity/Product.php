@@ -94,6 +94,11 @@ class Product
      */
     private $isActive = true;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lastPrice;
+
     public function __toString()
     {
         return $this->name;
@@ -359,6 +364,18 @@ class Product
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getLastPrice(): ?float
+    {
+        return $this->lastPrice;
+    }
+
+    public function setLastPrice(?float $lastPrice): self
+    {
+        $this->lastPrice = $lastPrice / 100;
 
         return $this;
     }
