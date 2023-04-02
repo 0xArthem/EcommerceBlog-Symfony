@@ -50,5 +50,28 @@
 		{% if product.image %}
 			<img src="{{ product.image }}" alt="{{ product.name }}">
 		{% endif %}
+
+
+		{% if product.reviewsProducts is not empty %}
+			<section>
+				<h3>Les avis</h3>
+
+				{% for review in product.reviewsProducts %}
+					<div>
+						<p>
+							{{ review.note }}/5
+						</p>
+						<p>Avis de
+							{{ review.user.username }}
+							:
+							{{ review.comment|raw }}
+						</p>
+					</div>
+				{% endfor %}
+			</section>
+		{% else %}
+			<h3>Aucun avis disponible pour le moment.</h3>
+		{% endif %}
+
 	</div>
 {% endblock %}
