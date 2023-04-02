@@ -64,12 +64,24 @@ class HomeController extends AbstractController
     /**
      * @Route("/product/category/{slug}", name="product_category")
      */
-    public function product_category($slug, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository , PaginatorInterface $paginator, Request $request): Response
+    public function product_category($slug, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository): Response
     {
         $category = $categoriesRepository->findOneBySlug($slug);
 
         return $this->render('home/product-category.html.twig', [
             'category' => $category
+        ]);
+    }
+
+     /**
+     * @Route("/product/{slug}", name="product")
+     */
+    public function product($slug, ProductRepository $repoProduct): Response
+    {
+        $product = $repoProduct->findOneBySlug($slug);
+
+        return $this->render('home/product.html.twig', [
+            'product' => $product
         ]);
     }
 }

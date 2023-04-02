@@ -30,7 +30,9 @@
 		</form>
 
 		{% for product in products %}
-			{% include "include/product.html.twig" %}
+			<a href="{{ path('product', {'slug':product.slug}) }}">
+				{% include "include/product.html.twig" %}
+			</a>
 		{% endfor %}
 
 		<div class="navigation">

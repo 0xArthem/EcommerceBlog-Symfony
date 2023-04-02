@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>
+			Produit
+			{{ product.name }}
+		</h1>
+
+		{% for category in product.category %}
+			<a href="{{ path('product_category', {'slug':category.slug}) }}">
+				{{ category.name }}
+			</a>
+		{% endfor %}
+
+		{% if product.isBestSeller == true %}
+			<p>
+				Best-seller
+			</p>
+		{% endif %}
+		{% if product.isNewArrival == true %}
+			<p>
+				New arrival
+			</p>
+		{% endif %}
+		{% if product.isFeatured == true %}
+			<p>
+				Vedette
+			</p>
+		{% endif %}
+		{% if product.isSpecialOffer == true %}
+			<p>
+				Special offer
+			</p>
+		{% endif %}
+
+		<p>{{ product.image }}</p>
+
+		<p>
+			{{ product.description|raw }}
+		</p>
+		<p>
+			{{ product.moreInformations|raw }}
+		</p>
+		<p>{{ product.price / 100 }}&euro;</p>
+
+		{% if product.image %}
+			<img src="{{ product.image }}" alt="{{ product.name }}">
+		{% endif %}
+	</div>
+{% endblock %}
