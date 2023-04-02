@@ -39,6 +39,11 @@ class ReviewsProduct
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive = false;
+
     public function __toString()
     {
         return $this->comment;
@@ -93,6 +98,18 @@ class ReviewsProduct
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

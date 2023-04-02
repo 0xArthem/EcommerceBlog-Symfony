@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class ReviewsProductCrudController extends AbstractCrudController
@@ -35,6 +36,7 @@ class ReviewsProductCrudController extends AbstractCrudController
             TextEditorField::new('comment')->setFormTypeOption('disabled', true),
             AssociationField::new('user')->setFormTypeOption('disabled', true),
             AssociationField::new('product')->setFormTypeOption('disabled', true),
+            BooleanField::new('isActive')->setLabel('Actif')
         ];
     }
 }

@@ -57,20 +57,34 @@
 				<h3>Les avis</h3>
 
 				{% for review in product.reviewsProducts %}
-					<div>
-						<p>
-							{{ review.note }}/5
-						</p>
-						<p>Avis de
-							{{ review.user.username }}
-							:
-							{{ review.comment|raw }}
-						</p>
-					</div>
+					{% if review.isActive %}
+						<div>
+							<p>
+								{{ review.note }}/5
+							</p>
+							<p>Avis de
+								{{ review.user.username }}
+								:
+								{{ review.comment|raw }}
+							</p>
+						</div>
+					{% endif %}
 				{% endfor %}
+
 			</section>
 		{% else %}
 			<h3>Aucun avis disponible pour le moment.</h3>
+		{% endif %}
+		{% if app.user %}
+			<section>
+				{{ form_start(form) }}
+				{{ form_row(form.note) }}
+				{{ form_row(form.comment) }}
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+				{{ form_end(form) }}
+			</section>
+		{% else %}
+			<a href="{{ path('app_login') }}">Connectez-vous</a>
 		{% endif %}
 
 	</div>

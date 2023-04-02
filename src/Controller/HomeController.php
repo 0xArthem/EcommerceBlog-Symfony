@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Repository\CategoriesRepository;
+use App\Entity\ReviewsProduct;
+use App\Form\ReviewsProductType;
 use App\Repository\ProductRepository;
+use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,12 +78,32 @@ class HomeController extends AbstractController
      /**
      * @Route("/product/{slug}", name="product")
      */
-    public function product($slug, ProductRepository $repoProduct): Response
+    public function product($slug, ProductRepository $repoProduct, Request $request): Response
     {
         $product = $repoProduct->findOneBySlug($slug);
 
+        $review = new ReviewsProduct();
+        $review->setProduct($product);
+        $form = $this->createForm(ReviewsProductType::class, $review);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->getUser();
+            $review = $form->getData();
+            $review->setUser($user);
+            $review->setProduct($product);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($review);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('product', ['slug' => $product->getSlug()]);
+        }
+        
         return $this->render('home/product.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'form' => $form->createView()
         ]);
     }
 }
