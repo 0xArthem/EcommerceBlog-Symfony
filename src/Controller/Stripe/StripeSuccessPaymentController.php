@@ -23,6 +23,7 @@ class StripeSuccessPaymentController extends AbstractController
 
         if (!$order->isIsPaid()) {
             $order->setIsPaid(true);
+            $order->setIsIsProcess(true);
             $manager->flush();
             $cartServices->deleteCart();
         }

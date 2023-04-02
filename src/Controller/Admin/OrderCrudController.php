@@ -35,7 +35,7 @@ class OrderCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
-            AssociationField::new('user')->setLabel('Utilisateur')->setFormTypeOption('disabled', true),
+            AssociationField::new('user')->setLabel('Client')->setFormTypeOption('disabled', true),
             TextField::new('reference')->hideOnIndex()->setLabel('Référence')->setFormTypeOption('disabled', true),
             // TextField::new('fullName')->hideOnIndex()->setLabel('Adresse'),
             TextField::new('carrierName')->setLabel('Livraison'),
@@ -49,6 +49,14 @@ class OrderCrudController extends AbstractCrudController
             MoneyField::new('carrierPrice')->setCurrency('EUR')->hideOnIndex()->setLabel('Prix de la livraison'),
             MoneyField::new('subTotalTTC')->setCurrency('EUR')->setLabel('Total TTC'),
             TextField::new('stripeCheckoutSessionId')->hideOnIndex()->setLabel('ID Checkout Stripe')->setFormTypeOption('disabled', true),
+            
+            BooleanField::new('isIsProcess')->setLabel('En cours'),
+            BooleanField::new('isInDelivering')->setLabel('Livraison'),
+            BooleanField::new('isDelivered')->setLabel('Livré'),
+            BooleanField::new('isInReturn')->setLabel('Retourné'),
+            BooleanField::new('isRefunded')->setLabel('Remboursé'),
+            BooleanField::new('isCanceled')->setLabel('Annulé'),
+        
         ];
     }
 }

@@ -51,12 +51,27 @@
 						{{ orderDetail.quantity }}
 						-
 						{{ orderDetail.subTotalHT / 100}}&euro;
-																																				-
+																																																																																																																																																																																																																																																																																										-
 						{{ orderDetail.taxe / 100}}&euro;
-																																				-
+																																																																																																																																																																																																																																																																																										-
 						{{ orderDetail.subTotalTTC / 100}}&euro;
 					</p>
 				{% endfor %}
+				<p>
+					{% if order.isCanceled == true %}
+						Commande annulée.
+					{% elseif order.isRefunded == true %}
+						Commande remboursée.
+					{% elseif order.isInReturn == true %}
+						Commande retournée.
+					{% elseif order.isDelivered == true %}
+						Commande livrée.
+					{% elseif order.isInDelivering == true %}
+						Vommande en cours de livraison.
+					{% elseif order.isIsProcess == true %}
+						Commande en cours de traitement.
+					{% endif %}
+				</p>
 				<br>
 			{% endfor %}
 		{% else %}

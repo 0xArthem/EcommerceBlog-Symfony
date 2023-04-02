@@ -97,6 +97,36 @@ class Order
      */
     private $isPaid = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isIsProcess= false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isInDelivering= false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDelivered= false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isInReturn= false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isRefunded= false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCanceled= false;
+
     public function __toString()
     {
         return $this->getReference();
@@ -307,6 +337,78 @@ class Order
     public function setIsPaid(bool $isPaid): self
     {
         $this->isPaid = $isPaid;
+
+        return $this;
+    }
+
+    public function isIsIsProcess(): ?bool
+    {
+        return $this->isIsProcess;
+    }
+
+    public function setIsIsProcess(bool $isIsProcess): self
+    {
+        $this->isIsProcess = $isIsProcess;
+
+        return $this;
+    }
+
+    public function isIsInDelivering(): ?bool
+    {
+        return $this->isInDelivering;
+    }
+
+    public function setIsInDelivering(bool $isInDelivering): self
+    {
+        $this->isInDelivering = $isInDelivering;
+
+        return $this;
+    }
+
+    public function isIsDelivered(): ?bool
+    {
+        return $this->isDelivered;
+    }
+
+    public function setIsDelivered(bool $isDelivered): self
+    {
+        $this->isDelivered = $isDelivered;
+
+        return $this;
+    }
+
+    public function isIsInReturn(): ?bool
+    {
+        return $this->isInReturn;
+    }
+
+    public function setisInReturn(bool $isInReturn): self
+    {
+        $this->isInReturn = $isInReturn;
+
+        return $this;
+    }
+
+    public function isIsRefunded(): ?bool
+    {
+        return $this->isRefunded;
+    }
+
+    public function setIsRefunded(bool $isRefunded): self
+    {
+        $this->isRefunded = $isRefunded;
+
+        return $this;
+    }
+
+    public function isIsCanceled(): ?bool
+    {
+        return $this->isCanceled;
+    }
+
+    public function setIsCanceled(bool $isCanceled): self
+    {
+        $this->isCanceled = $isCanceled;
 
         return $this;
     }
