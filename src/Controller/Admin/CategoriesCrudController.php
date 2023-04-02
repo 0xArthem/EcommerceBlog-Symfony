@@ -6,6 +6,7 @@ use App\Entity\Categories;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -32,7 +33,11 @@ class CategoriesCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             TextField::new('name')->setLabel('Titre'),
             TextField::new('slug')->setLabel('URL'),
-            TextEditorField::new('description')->setLabel('Description')
+            TextEditorField::new('description')->setLabel('Description'),
+            ImageField::new('image')->setBasePath('/assets/images/')
+                ->setUploadDir('./public/assets/images/')
+                ->setRequired(false)
+                ->setLabel('Image'),
         ];
     }
 }

@@ -37,8 +37,6 @@
 			</p>
 		{% endif %}
 
-		<p>{{ product.image }}</p>
-
 		<p>
 			{{ product.description|raw }}
 		</p>
@@ -48,7 +46,7 @@
 		<p>{{ product.price / 100 }}&euro;</p>
 
 		{% if product.image %}
-			<img src="{{ product.image }}" alt="{{ product.name }}">
+			<img src="/assets/images/{{ product.image }}" alt="{{ product.name }}">
 		{% endif %}
 
 
