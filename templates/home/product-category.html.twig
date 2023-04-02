@@ -17,8 +17,12 @@
 		{% endif %}
 
 
-		{% for product in category.products %}
+		{% for product in products %}
 			{% include "include/product.html.twig" %}
 		{% endfor %}
+
+		<div class="navigation">
+			{{ knp_pagination_render(products) }}
+		</div>
 	</div>
 {% endblock %}

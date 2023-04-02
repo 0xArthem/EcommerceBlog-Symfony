@@ -2,24 +2,26 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cart;
+use App\Entity\User;
+use App\Entity\Order;
+use App\Entity\Promo;
 use App\Entity\Address;
 use App\Entity\Carrier;
-use App\Entity\Cart;
-use App\Entity\CartDetails;
-use App\Entity\Categories;
-use App\Entity\Order;
-use App\Entity\OrderDetails;
 use App\Entity\Product;
+use App\Entity\Categories;
+use App\Entity\CartDetails;
+use App\Entity\TagsProduct;
+use App\Entity\OrderDetails;
 use App\Entity\RelatedProduct;
 use App\Entity\ReviewsProduct;
-use App\Entity\TagsProduct;
-use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Controller\Admin\OrderCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -64,7 +66,8 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::subMenu('Utilisateurs', 'fas fa-users')->setSubItems([
                 MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class),
                 MenuItem::linkToCrud('Adresses', 'fas fa-map-marker-alt', Address::class)
-            ]);            
+            ]);  
+
 
             // yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);
             // yield MenuItem::linkToCrud('Tag', 'fas fa-list', TagsProduct::class);

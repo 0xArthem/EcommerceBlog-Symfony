@@ -78,12 +78,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/product/category/{slug}", name="product_category")
      */
-    public function product_category($slug, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository): Response
+    public function product_category($slug, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $category = $categoriesRepository->findOneBySlug($slug);
 
+        $query = $repoProduct->createQueryBuilder('p')
+        ->leftJoin('p.category', 'c')
+        ->where('c.id = :category_id')
+        ->andWhere('p.isActive = :isActive')
+        ->setParameter('category_id', $category->getId())
+        ->setParameter('isActive', true)
+        ->orderBy('p.id', 'DESC')
+        ->getQuery()
+        ->getResult();
+
+        $products = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            12
+        );
+
         return $this->render('home/product-category.html.twig', [
-            'category' => $category
+            'category' => $category,
+            'products' => $products
         ]);
     }
 
