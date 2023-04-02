@@ -24,6 +24,12 @@
 		<h2>Affichage des produits</h2>
 
 		<p>Tous les produits</p>
+		<form method="get" action="{{ path('search_products') }}">
+			<label for="search">Rechercher :</label>
+			<input type="text" id="search" name="search" placeholder="Entrez un terme de recherche">
+			<button type="submit">Rechercher</button>
+		</form>
+
 		{% for product in products %}
 			{% include "include/product.html.twig" %}
 		{% endfor %}

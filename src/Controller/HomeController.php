@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -28,6 +29,24 @@ class HomeController extends AbstractController
             'productNewArrival' => $productNewArrival,
             'productFeatured' => $productFeatured,
             'productSpecialOffer' => $productSpecialOffer
+        ]);
+    }
+
+     /**
+     * @Route("/search", name="search_products")
+     */
+    public function searchProducts(Request $request, ProductRepository $productRepository)
+    {
+        $searchTerm = $request->query->get('search');
+        $products = $productRepository->createQueryBuilder('p')
+            ->where('p.name LIKE :searchTerm OR p.description LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('home/search.html.twig', [
+            'products' => $products,
+            'searchTerm' => $searchTerm,
         ]);
     }
 }
