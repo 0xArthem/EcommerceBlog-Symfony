@@ -31,6 +31,7 @@ class CategoriesCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             TextField::new('name')->setLabel('Titre'),
+            TextField::new('slug')->setLabel('URL'),
             TextEditorField::new('description')->setLabel('Description')
         ];
     }

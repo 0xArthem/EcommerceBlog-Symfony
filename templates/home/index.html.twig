@@ -37,6 +37,16 @@
 			{{ knp_pagination_render(products) }}
 		</div>
 
+		<h2>Affichage des catégories</h2>
+
+		<p>Toutes les catégories</p>
+
+		{% for category in categories %}
+			<a href="{{ path('product_category', {'slug':category.slug}) }}">
+				{{ category.name }}
+			</a>
+		{% endfor %}
+
 		<br><br>
 		<p>Tous les produits BestSeller</p>
 		{% for product in productBestSeller %}

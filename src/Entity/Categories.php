@@ -41,6 +41,11 @@ class Categories
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="category")
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
     
     public function __toString()
     {
@@ -116,6 +121,18 @@ class Categories
         if ($this->products->removeElement($product)) {
             $product->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
