@@ -38,13 +38,13 @@ class CartCrudController extends AbstractCrudController
             TextField::new('reference')->hideOnIndex()->setLabel('Référence')->setFormTypeOption('disabled', true),
             // TextField::new('fullName')->hideOnIndex()->setLabel('Adresse'),
             TextField::new('carrierName')->setLabel('Livraison'),
-            MoneyField::new('carrierPrice')->setCurrency('EUR')->hideOnIndex()->setLabel('Prix de la livraison'),
             TextareaField::new('deliveryAddress')->hideOnIndex()->setLabel('Adresse de livraison'),
             TextareaField::new('moreInformations')->hideOnIndex()->setLabel('Informations supplémentaires'),
             DateTimeField::new('createdAt')->setLabel('Date de création')->setFormTypeOption('disabled', true),
             IntegerField::new('quantity')->setLabel('Quantité'),
             MoneyField::new('subTotalHT')->setCurrency('EUR')->hideOnIndex()->setLabel('Total HT'),
             MoneyField::new('taxe')->setCurrency('EUR')->hideOnIndex()->setLabel('Taxe - TVA 20%'),
+            MoneyField::new('carrierPrice')->setCurrency('EUR')->hideOnIndex()->setLabel('Prix de la livraison'),
             MoneyField::new('subTotalTTC')->setCurrency('EUR')->setLabel('Total TTC'),
         ];
     }
