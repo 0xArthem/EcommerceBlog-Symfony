@@ -52,18 +52,18 @@ class DashboardController extends AbstractDashboardController
             
             yield MenuItem::subMenu('Commandes', 'fas fa-shopping-cart')->setSubItems([
                 MenuItem::linkToCrud('Commandes', 'fas fa-shopping-cart', Order::class),
-                MenuItem::linkToCrud('Détails de commande', 'fas fa-info-circle', OrderDetails::class),
+                MenuItem::linkToCrud('Détails des commandes', 'fas fa-info-circle', OrderDetails::class),
                 MenuItem::linkToCrud('Transporteurs', 'fas fa-truck', Carrier::class)
             ]);
 
             yield MenuItem::subMenu('Paniers', 'fas fa-shopping-basket')->setSubItems([
                 MenuItem::linkToCrud('Paniers', 'fas fa-shopping-basket', Cart::class),
-                MenuItem::linkToCrud('Détails de panier', 'fas fa-info-circle', CartDetails::class),
+                MenuItem::linkToCrud('Détails des paniers', 'fas fa-info-circle', CartDetails::class),
             ]);
 
             yield MenuItem::subMenu('Utilisateurs', 'fas fa-users')->setSubItems([
                 MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class),
-                MenuItem::linkToCrud('Adresse', 'fas fa-map-marker-alt', Address::class)
+                MenuItem::linkToCrud('Adresses', 'fas fa-map-marker-alt', Address::class)
             ]);            
 
             // yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);

@@ -38,13 +38,14 @@ class AddressController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $address->setUser($user);
+            
             $addressRepository->add($address, true);
 
-            if ($cartServices->getFullCart()) {
-                return $this->redirectToRoute('app_checkout');
-            }
+            // if ($cartServices->getFullCart()) {
+            //     return $this->redirectToRoute('app_checkout');
+            // }
 
-            return $this->redirectToRoute('account');
+            return $this->redirectToRoute('app_account');
         }
 
         return $this->renderForm('address/new.html.twig', [

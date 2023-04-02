@@ -1,54 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Address{% endblock %}
+{% block title %}Adresse
+{% endblock %}
 
 {% block body %}
-    <h1>Address</h1>
+	<h1>Adresse</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ address.id }}</td>
-            </tr>
-            <tr>
-                <th>FullName</th>
-                <td>{{ address.fullName }}</td>
-            </tr>
-            <tr>
-                <th>Company</th>
-                <td>{{ address.company }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ address.address }}</td>
-            </tr>
-            <tr>
-                <th>Complement</th>
-                <td>{{ address.complement }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ address.phone }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ address.city }}</td>
-            </tr>
-            <tr>
-                <th>CodePostal</th>
-                <td>{{ address.codePostal }}</td>
-            </tr>
-            <tr>
-                <th>Country</th>
-                <td>{{ address.country }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>{{ address.id }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.fullName }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.company }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.address|raw }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.complement }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.phone }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.city }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.codePostal }}</td>
+			</tr>
+			<tr>
+				<td>{{ address.country }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_address_index') }}">back to list</a>
+	<br>
 
-    <a href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
+	<a href="{{ path('app_address_index') }}">Retour</a>
 
-    {{ include('address/_delete_form.html.twig') }}
+	<br>
+
+	<a href="{{ path('app_address_edit', {'id': address.id}) }}">Editer</a>
+
+	{{ include('address/_delete_form.html.twig') }}
 {% endblock %}
