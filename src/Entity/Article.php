@@ -45,7 +45,12 @@ class Article
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isActive = false;
+    private $isActive = true;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -120,6 +125,18 @@ class Article
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

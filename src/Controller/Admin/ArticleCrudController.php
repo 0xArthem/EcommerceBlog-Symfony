@@ -33,6 +33,7 @@ class ArticleCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             TextField::new('title')->setLabel('Titre'),
+            TextField::new('slug')->setLabel('URL'),
             AssociationField::new('category')->setLabel('Catégorie'),
             TextEditorField::new('description')->setLabel('Description'),
             TextEditorField::new('content')->setLabel('Contenu'),

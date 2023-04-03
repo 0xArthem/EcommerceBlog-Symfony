@@ -23,15 +23,25 @@
 		<section>
 			<h2>Section BLOG</h2>
 
+			<h4>Tous les articles</h4>
 			{% for article in articles %}
-				<a href="">
+				<a href="{{ path('article', {'slug':article.slug}) }}">
 					{{ article.title }}
+					- 
+					{{ article.category.name }}
 				</a>
+				<p>
+				{{ article.description|raw }}
+				</p>
 			{% endfor %}
+
+			<a href="{{ path('articles') }}">Voir tous les articles</a>
 
 			<h4>Toutes les catégories des articles</h4>
 			{% for articlesCategorie in articlesCategories %}
-				{{ articlesCategorie.name }}
+				<a href="{{ path('article_category', {'slug':articlesCategorie.slug}) }}">
+					{{ articlesCategorie.name }}
+				</a>
 			{% endfor %}
 
 		</section>

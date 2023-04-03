@@ -52,7 +52,7 @@ class HomeController extends AbstractController
 
         /*** blog */
 
-        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'));
+        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'), 3, 0);
         $articlesCategories = $articleCategoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
@@ -145,4 +145,54 @@ class HomeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/article/{slug}", name="article")
+     */
+    public function article($slug, ArticleRepository $articleRepository, Request $request): Response
+    {
+        $article = $articleRepository->findOneBySlug($slug);
+        
+        return $this->render('blog/article.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/articles/category/{slug}", name="article_category")
+     */
+    public function article_category($slug, ArticleCategoryRepository $articleCategoryRepository, ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
+    {
+        $articlesCategorie = $articleCategoryRepository->findOneBySlug($slug);
+        $articles = $articleRepository->findByCategory($articlesCategorie);
+
+        $pagination = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+        return $this->render('blog/article-category.html.twig', [
+            'articlesCategorie' => $articlesCategorie,
+            'articles' => $pagination,
+        ]);
+    }
+
+    /**
+     * @Route("/articles", name="articles")
+     */
+    public function articles(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $query = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'));
+        $articles = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            12
+        );
+
+        return $this->render('blog/articles.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
 }
