@@ -42,6 +42,11 @@ class Article
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Article
     public function setCategory(?ArticleCategory $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

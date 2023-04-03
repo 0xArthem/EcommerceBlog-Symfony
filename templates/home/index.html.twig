@@ -20,6 +20,23 @@
 		<a href="{{path('app_cart') }}">Panier</a>
 
 
+		<section>
+			<h2>Section BLOG</h2>
+
+			{% for article in articles %}
+				<a href="">
+					{{ article.title }}
+				</a>
+			{% endfor %}
+
+			<h4>Toutes les catégories des articles</h4>
+			{% for articlesCategorie in articlesCategories %}
+				{{ articlesCategorie.name }}
+			{% endfor %}
+
+		</section>
+
+
 		<h2>Affichage des produits</h2>
 
 		<p>Tous les produits</p>

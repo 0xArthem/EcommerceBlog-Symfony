@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\ArticleCategory;
 use App\Entity\Product;
 use App\Entity\ReviewsProduct;
 use App\Form\ReviewsProductType;
+use App\Repository\ArticleCategoryRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,7 +22,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ProductRepository $repoProduct, CategoriesRepository $categoriesRepository , PaginatorInterface $paginator, Request $request): Response
+    public function index(ArticleCategoryRepository $articleCategoryRepository, ArticleRepository $articleRepository, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository , PaginatorInterface $paginator, Request $request): Response
     {
         $query = $repoProduct->findBy(array('isActive' => true), array('id' => 'DESC'));
         $products = $paginator->paginate(
@@ -47,13 +50,20 @@ class HomeController extends AbstractController
             'isActive' => true
         ]);
 
+        /*** blog */
+
+        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'));
+        $articlesCategories = $articleCategoryRepository->findAll();
+
         return $this->render('home/index.html.twig', [
             'products' => $products,
             'productBestSeller' => $productBestSeller,
             'productNewArrival' => $productNewArrival,
             'productFeatured' => $productFeatured,
             'productSpecialOffer' => $productSpecialOffer,
-            'categories' => $categories
+            'categories' => $categories,
+            'articles' => $articles,
+            'articlesCategories' => $articlesCategories
         ]);
     }
 
