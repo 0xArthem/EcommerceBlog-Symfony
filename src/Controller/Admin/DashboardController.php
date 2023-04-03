@@ -16,6 +16,8 @@ use App\Entity\OrderDetails;
 use App\Entity\RelatedProduct;
 use App\Entity\ReviewsProduct;
 use App\Controller\Admin\OrderCrudController;
+use App\Entity\Article;
+use App\Entity\ArticleCategory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -68,6 +70,10 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Adresses', 'fas fa-map-marker-alt', Address::class)
             ]);  
 
+            yield MenuItem::subMenu('Blog', 'fas fa-blog')->setSubItems([
+                MenuItem::linkToCrud('Articles', 'fas fa-file-alt', Article::class),
+                MenuItem::linkToCrud('Catégories', 'fas fa-folder', ArticleCategory::class)
+            ]);
 
             // yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);
             // yield MenuItem::linkToCrud('Tag', 'fas fa-list', TagsProduct::class);

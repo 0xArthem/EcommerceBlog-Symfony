@@ -41,14 +41,9 @@ class AddressType extends AbstractType
         ])
         ->add('company', TextType::class, [
             'label' => false,
+            'required' => false,
             'attr' => [
                 'placeholder' => 'Entreprise'
-            ],
-            'constraints' => [
-                new Length([
-                    'max' => 255,
-                    'maxMessage' => 'Le nom de l\'entreprise ne doit pas dépasser {{ limit }} caractères'
-                ])
             ]
         ])
         ->add('address', TextareaType::class, [
@@ -70,14 +65,9 @@ class AddressType extends AbstractType
         ])
         ->add('complement', TextareaType::class, [
             'label' => false,
+            'required' => false,
             'attr' => [
                 'placeholder' => 'Informations supplémentaires'
-            ],
-            'constraints' => [
-                new Length([
-                    'max' => 1000,
-                    'maxMessage' => 'Les informations supplémentaires ne doivent pas dépasser {{ limit }} caractères'
-                ])
             ]
         ])
         ->add('phone', TextType::class, [
