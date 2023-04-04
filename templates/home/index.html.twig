@@ -4,11 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h2 class="my-5">Affichage des produits</h2>
-
-		<p>Tous les produits</p>
-
+	<div class="py-5">
 		{% include "include/formulaire-product.html.twig" %}
 
 		<div class="row row-cols-1 row-cols-md-3 g-4">
@@ -22,16 +18,6 @@
 		<div class="navigation">
 			{{ knp_pagination_render(products) }}
 		</div>
-
-		<h2>Affichage des catégories</h2>
-
-		<p>Toutes les catégories</p>
-
-		{% for category in categories %}
-			<a href="{{ path('product_category', {'slug':category.slug}) }}">
-				{{ category.name }}
-			</a>
-		{% endfor %}
 
 		<br><br>
 		<p>Tous les produits BestSeller</p>

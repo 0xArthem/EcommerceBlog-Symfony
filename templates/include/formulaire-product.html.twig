@@ -1,10 +1,17 @@
 <section class="shadow section-formulaire-produits">
 	<form class="form-inline my-4" method="get" action="{{ path('search_products') }}">
-		<div class="input-group">
-			<input type="text" class="form-control form-control-lg shadow-none border-0 rounded-pill me-1" id="search" name="search" placeholder="Recherche par mots-clés...">
+		<div class="input-group flex-nowrap">
+			<input type="text" class="form-control form-control-lg shadow-none border-0 rounded-pill flex-grow-1 me-1" id="search" name="search" placeholder="Recherche par mots-clés...">
 			<button type="submit" class="btn btn-dark rounded-pill ms-1">
 				<i class="fas fa-search"></i>
 			</button>
 		</div>
 	</form>
+
+	{% for category in categories %}
+		<a href="{{ path('product_category', {'slug':category.slug}) }}" class="btn btn-dark btn-rounded me-2 btn-form-category-name">
+			<i class="fas fa-caret-right form-category-right me-2"></i>
+			{{ category.name }}
+		</a>
+	{% endfor %}
 </section>

@@ -27,6 +27,17 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 1px;
-  padding-bottom: 1px;
+  padding-bottom: 23px;
   margin-bottom: 35px;
+
+  /* display: flex;
+  justify-content: space-between; */
+}
+.btn-form-category-name {
+  text-transform: none !important;
+  font-size: 15.5px !important;
+  font-weight: normal !important;
+}
+.form-category-right {
+  color: var(--third) !important;
 }
