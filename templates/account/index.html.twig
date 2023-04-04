@@ -9,6 +9,24 @@
 
 		<h2>{{ app.user.email }}</h2>
 
+		{% if app.user %}
+			<a href="{{ path('app_account') }}">
+				<i class="fas fa-user ms-1 text-dark"></i>
+			</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{path('admin') }}" target="_BLANK">
+					<i class="fas fa-screwdriver-wrench ms-2 text-dark"></i>
+				</a>
+			{% endif %}
+		{% else %}
+			<a href="{{ path('app_register') }}">
+				<i class="fas fa-user ms-1 text-dark"></i>
+			</a>
+			<a href="{{ path('app_login') }}">
+				<i class="fas fa-arrow-right-from-bracket me-1 text-dark"></i>
+			</a>
+		{% endif %}
+
 		<a href="{{ path('app_address_index') }}">Mes adresses</a>
 		<a href="{{ path('app_address_new') }}">Enregister une nouvelle adresse</a>
 
@@ -51,9 +69,9 @@
 						{{ orderDetail.quantity }}
 						-
 						{{ orderDetail.subTotalHT / 100}}&euro;
-																																																																																																																																																																																																																																																																																										-
+																																																																																																																																																																																																																																																																																																																								-
 						{{ orderDetail.taxe / 100}}&euro;
-																																																																																																																																																																																																																																																																																										-
+																																																																																																																																																																																																																																																																																																																								-
 						{{ orderDetail.subTotalTTC / 100}}&euro;
 					</p>
 				{% endfor %}

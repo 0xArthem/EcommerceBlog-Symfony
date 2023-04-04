@@ -1,32 +1,116 @@
-<div class="navbar">
-	<h3>Menu</h3>
-	{% if app.session.get('cart') %}
-		Nombre d'éléments dans le panier :
-		{{ app.session.get('cartData').data.quantity_cart }}
-		<a href="{{ path('app_cart') }}">Voir le panier</a>
-	{% endif %}
+<!-- Navbar -->
+<nav
+	class="navbar navbar-expand-lg">
+	<!-- Container wrapper -->
+	<div
+		class="container-fluid">
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
 
-	{% if app.session.get('cart') %}
-		{% if app.session.get('cartData') %}
-			{% for element in app.session.get('cartData').products %}
-				{{ element.product.name }}
-				-
-				{{ element.product.price }}
-				-
-				{{ element.quantity }}
-				-
-				{{ element.quantity * element.product.price }}
-				/
-				<a href="{{ path('cart_delete', {'id':element.product.id}) }}">
-					Supprimer
+		<!-- Collapsible wrapper -->
+		<div
+			class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
+			<!-- Left links -->
+			<ul class="navbar-nav mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link navbar-nav-link" aria-current="page" href="#">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link navbar-nav-link" href="#">Boutique</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link navbar-nav-link" href="#">Blog</a>
+				</li>
+			</ul>
+			<!-- Left links -->
+		</div>
+		<!-- Collapsible wrapper -->
+
+		<!-- Right elements -->
+		<div
+			class="d-flex align-items-center">
+			<!-- Notifications -->
+			<div class="dropdown mx-1">
+				<a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+					<i class="fas fa-shopping-cart me-1"></i>
+					{% if app.session.get('cart') %}
+						<span class="badge rounded-pill badge-notification badge-quantity-cart">
+							{{ app.session.get('cartData').data.quantity_cart }}
+						</span>
+					{% endif %}
 				</a>
-			{% endfor %}
+				<ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 py-3" aria-labelledby="navbarDropdownMenuLink">
+					<section class="section-cart-data px-3">
+						{% if app.session.get('cart') %}
+							{% if app.session.get('cartData') %}
+								{% for element in app.session.get('cartData').products %}
+									<div class="d-flex justify-content-between align-items-center pb-2">
+										<div class="me-2">
+											<a href="#" class="text-dark">
+												{{ element.product.name }}
+											</a>
+										</div>
+										<div>x{{ element.quantity }}</div>
+										<div class="d-flex flex-column">
+											<div class="fw-bold">
+												{{ element.product.price }}
+												&euro;
+											</div>
+										</div>
+										<div>
+											<a href="{{ path('cart_delete', {'id':element.product.id}) }}">
+												<i class="fas fa-trash ms-2"></i>
+											</a>
+										</div>
+									</div>
+								{% endfor %}
+								<div class="mt-3 py-2">
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="fw-bold">
+											Prix total HT :
+										</div>
+										<div class="fw-bold">
+											{{ app.session.get('cartData').data.subTotalHT }}
+											&euro;
+										</div>
+									</div>
+								</div>
 
-			Prix total HT :
-			{{ app.session.get('cartData').data.subTotalHT }}
-		{% else %}
-			<p>Panier vide.</p>
-		{% endif %}
-	{% endif %}
-
-</div>
+								<div class="div-btn-cart-data">
+									<div>
+										<a href="{{ path('app_cart') }}" class="btn btn-cart-data-shopping">
+											<i class="fas fa-shopping-cart"></i>
+										</a>
+									</div>
+									<div>
+										<a href="{{ path('app_checkout') }}" class="btn btn-cart-data">
+											Finaliser la commande
+										</a>
+									</div>
+								</div>
+							{% else %}
+								<div class="py-3">
+									<p class="text-muted mb-0">Panier vide.</p>
+								</div>
+							{% endif %}
+						{% endif %}
+					</section>
+				</ul>
+			</div>
+			{% if app.user %}
+				<a href="{{ path('app_account') }}">
+					<i class="fas fa-user ms-1 text-dark"></i>
+				</a>
+			{% else %}
+				<a href="{{ path('app_register') }}">
+					<i class="fas fa-user ms-1 text-dark"></i>
+				</a>
+			{% endif %}
+		</div>
+		<!-- Right elements -->
+	</div>
+	<!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
