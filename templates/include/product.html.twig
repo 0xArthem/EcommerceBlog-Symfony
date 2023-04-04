@@ -1,10 +1,20 @@
-<div>
-	<h4>
-		{{ product.name }}
-		<img src="/assets/images/{{ product.image }}" alt="{{ product.name }}">
-
-		<a href="{{ path('cart_add', {'id':product.id}) }}">
-			Ajouter au panier
-		</a>
-	</h4>
+<div class="col mb-4 text-dark">
+	<div class="card h-100 border-0 shadow-sm">
+		<img src="/assets/images/{{ product.image }}" alt="{{ product.name }}" class="card-img-top card-img-product">
+		<div class="card-body">
+			<h5 class="h5-product-price">
+				<button type="button" class="btn bg-light btn-rounded card-btn-product-price" data-mdb-ripple-color="dark">
+					{{ product.price }}&euro;
+				</button>
+			</h5>
+			<h5 class="card-title mb-2">{{ product.name }}</h5>
+			<p class="card-text">{{ product.description|raw }}</p>
+			<div class="d-flex justify-content-center align-items-center">
+				<button class="btn btn-voir-fiche-produit mx-1" type="button">
+					Consulter la fiche produit
+					<i class="fas fa-bars-staggered ms-2 text-dark"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

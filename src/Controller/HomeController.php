@@ -43,8 +43,7 @@ class HomeController extends AbstractController
         ]);
         $productFeatured = $repoProduct->findBy([
             'isFeatured' => true,
-            'isActive' => true
-        ]);
+            'isActive' => true]);
         $productSpecialOffer = $repoProduct->findBy([
             'isSpecialOffer' => true,
             'isActive' => true

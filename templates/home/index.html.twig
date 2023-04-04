@@ -5,34 +5,27 @@
 
 {% block body %}
 	<div>
-		<section class="my-5">
-			<div class="row">
-				<div class="col-md-6 mx-auto">
-					{% include "include/article.html.twig" %}
-					{# <div class="text-center mt-4"><a href="{{ path('articles') }}" class="btn btn-primary">Voir tous les articles</a></div> #}
-				</div>
-
-				<div class="col-md-4 mx-auto">
-					{% include "include/home-categories.html.twig" %}
-				</div>
-			</div>
-		</section>
-
-
-		<h2>Affichage des produits</h2>
+		<h2 class="my-5">Affichage des produits</h2>
 
 		<p>Tous les produits</p>
-		<form method="get" action="{{ path('search_products') }}">
-			<label for="search">Rechercher :</label>
-			<input type="text" id="search" name="search" placeholder="Entrez un mot-clé">
-			<button type="submit">Rechercher</button>
+
+		<form class="form-inline my-4" method="get" action="{{ path('search_products') }}">
+			<div class="input-group">
+				<label for="search" class="sr-only">Rechercher :</label>
+				<input type="text" class="form-control" id="search" name="search" placeholder="Entrez un mot-clé">
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-dark p-3">Rechercher</button>
+				</div>
+			</div>
 		</form>
 
-		{% for product in products %}
-			<a href="{{ path('product', {'slug':product.slug}) }}">
-				{% include "include/product.html.twig" %}
-			</a>
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in products %}
+				<a href="{{ path('product', {'slug':product.slug}) }}">
+					{% include "include/product.html.twig" %}
+				</a>
+			{% endfor %}
+		</div>
 
 		<div class="navigation">
 			{{ knp_pagination_render(products) }}
@@ -50,26 +43,47 @@
 
 		<br><br>
 		<p>Tous les produits BestSeller</p>
-		{% for product in productBestSeller %}
-			{{ include('include/product.html.twig', {'product': product})}}
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in productBestSeller %}
+				{{ include('include/product.html.twig', {'product': product})}}
+			{% endfor %}
+		</div>
 
 		<br><br>
 		<p>Tous les produits New Arrival</p>
-		{% for product in productNewArrival %}
-			{{ include('include/product.html.twig', {'product': product})}}
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in productNewArrival %}
+				{{ include('include/product.html.twig', {'product': product})}}
+			{% endfor %}
+		</div>
 
 		<br><br>
 		<p>Tous les produits Featured</p>
-		{% for product in productFeatured %}
-			{{ include('include/product.html.twig', {'product': product})}}
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in productFeatured %}
+				{{ include('include/product.html.twig', {'product': product})}}
+			{% endfor %}
+		</div>
 
 		<br><br>
 		<p>Tous les produits SpecialOffer</p>
-		{% for product in productSpecialOffer %}
-			{{ include('include/product.html.twig', {'product': product})}}
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in productSpecialOffer %}
+				{{ include('include/product.html.twig', {'product': product})}}
+			{% endfor %}
+		</div>
+
+		<section class="my-5">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					{% include "include/article.html.twig" %}
+					{# <div class="text-center mt-4"><a href="{{ path('articles') }}" class="btn btn-primary">Voir tous les articles</a></div> #}
+				</div>
+
+				<div class="col-md-4 mx-auto">
+					{% include "include/home-categories.html.twig" %}
+				</div>
+			</div>
+		</section>
 	</div>
 {% endblock %}

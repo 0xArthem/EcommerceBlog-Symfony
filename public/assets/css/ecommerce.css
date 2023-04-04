@@ -1,0 +1,19 @@
+/** CARTE PRODUIT **/
+.btn-voir-fiche-produit {
+  text-transform: none !important;
+  font-size: 15.5px !important;
+  font-weight: normal !important;
+  background-color: var(--third) !important;
+  color: var(--fourth) !important;
+}
+.h5-product-price {
+  margin-top: -45px;
+}
+.card-img-product {
+  height: 270px !important;
+}
+.card-btn-product-price {
+  font-size: 15.5px !important;
+  letter-spacing: 0.5px !important;
+  color: var(--main) !important;
+}
