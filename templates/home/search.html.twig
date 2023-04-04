@@ -6,7 +6,9 @@
 {% block body %}
 	<div>
 		<h1>Recherche produits</h1>
-		{% include "include/formulaire-product.html.twig" %}
+		<section class="section-formulaire">
+			{% include "include/formulaire-product.html.twig" %}
+		</section>
 
 		{% if products is empty %}
 			<p>Désolé. Aucun de nos produits ne correspond à ce mot-clé.</p>

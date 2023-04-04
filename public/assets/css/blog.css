@@ -12,6 +12,12 @@
   cursor: pointer;
   border-radius: 5px !important;
 }
+.section-blog {
+  background-color: var(--second);
+  padding-left: 55px !important;
+  padding-right: 55px !important;
+  padding-top: 60px;
+}
 
 /** ARTICLE **/
 .card-title-article {

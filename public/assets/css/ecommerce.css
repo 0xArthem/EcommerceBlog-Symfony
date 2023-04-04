@@ -19,6 +19,10 @@
 }
 
 /** FORM PRODUITS **/
+.section-formulaire {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+}
 .section-formulaire-produits {
   /* width: 32.3%; */
   border-radius: 5px;
@@ -42,14 +46,55 @@
   color: var(--third) !important;
 }
 
+.section-affichage-produits {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+}
 /** SECTION BEST-SELLER **/
 .section-best-seller {
   /* background-color: var(--third) !important; */
-  margin-left: -7.6% !important;
-  margin-right: -7.6% !important;
   padding: 40px;
+  padding-left: 100px !important;
+  padding-right: 100px !important;
 }
 .best-seller-section-title {
   text-align: center;
   color: var(--third) !important;
+}
+
+/** OFFRES SPECIALES **/
+.section-offres-speciales {
+  background-image: linear-gradient(
+    135deg,
+    #fff 25%,
+    #fbfbfb 25%,
+    #fbfbfb 50%,
+    #fff 50%,
+    #fff 75%,
+    #fbfbfb 75%,
+    #fbfbfb 100%
+  );
+  background-size: 15px 15px;
+  background-color: #f8f9fa;
+}
+.section-title-offres-speciales {
+  border-radius: 5px;
+  padding: 30px;
+  padding-bottom: 20px !important;
+
+  margin-top: -100px !important;
+}
+.titre-offres-speciales {
+  color: var(--main);
+  font-size: 25px !important;
+}
+.span-titre-offres-speciales {
+  color: var(--third) !important;
+  font-weight: bold !important;
+}
+#div-center-offres-speciales {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 45px;
+  padding-top: 45px;
 }

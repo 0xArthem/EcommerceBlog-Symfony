@@ -4,22 +4,52 @@
 {% endblock %}
 
 {% block body %}
-	<div class="py-5">
-		{% include "include/formulaire-product.html.twig" %}
+	<div class="pt-5">
+		<section class="section-formulaire">
+			{% include "include/formulaire-product.html.twig" %}
+		</section>
 
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for product in products %}
-				<a href="{{ path('product', {'slug':product.slug}) }}">
-					{% include "include/product.html.twig" %}
-				</a>
-			{% endfor %}
-		</div>
+		<section class="section-affichage-produits">
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+				{% for product in products %}
+					<a href="{{ path('product', {'slug':product.slug}) }}">
+						{% include "include/product.html.twig" %}
+					</a>
+				{% endfor %}
+			</div>
 
-		<div class="navigation">
-			{{ knp_pagination_render(products) }}
-		</div>
+			<div class="navigation">
+				{{ knp_pagination_render(products) }}
+			</div>
+		</section>
 
-		<br><br>
+		<br><br><br><br>
+
+		<section class="py-5 section-offres-speciales">
+			<div class="container py-1">
+				<section class="section-title-offres-speciales bg-light shadow">
+					<h2 class="text-center titre-offres-speciales">
+						Nos
+						<span class="span-titre-offres-speciales">offres spéciales</span>
+						du mois
+						<i class="fas fa-gifts ms-1"></i>
+					</h2>
+				</section>
+
+				<div id="div-center-offres-speciales">
+					<i class="fas fa-angle-down"></i>
+				</div>
+
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					{% for product in productSpecialOffer %}
+						<a href="{{ path('product', {'slug':product.slug}) }}">
+							{% include "include/product.html.twig" %}
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
 		<section class="section-best-seller bg-light">
 			<div class="container">
 				<h2 class="best-seller-section-title">
@@ -36,31 +66,7 @@
 			</div>
 		</section>
 
-		<br><br>
-		<p>Tous les produits New Arrival</p>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for product in productNewArrival %}
-				{{ include('include/product.html.twig', {'product': product})}}
-			{% endfor %}
-		</div>
-
-		<br><br>
-		<p>Tous les produits Featured</p>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for product in productFeatured %}
-				{{ include('include/product.html.twig', {'product': product})}}
-			{% endfor %}
-		</div>
-
-		<br><br>
-		<p>Tous les produits SpecialOffer</p>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for product in productSpecialOffer %}
-				{{ include('include/product.html.twig', {'product': product})}}
-			{% endfor %}
-		</div>
-
-		<section class="my-5">
+		<section class="section-blog">
 			<div class="row">
 				<div class="col-md-6 mx-auto">
 					{% include "include/article.html.twig" %}
