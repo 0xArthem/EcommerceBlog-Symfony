@@ -41,3 +41,15 @@
 .form-category-right {
   color: var(--third) !important;
 }
+
+/** SECTION BEST-SELLER **/
+.section-best-seller {
+  /* background-color: var(--third) !important; */
+  margin-left: -7.6% !important;
+  margin-right: -7.6% !important;
+  padding: 40px;
+}
+.best-seller-section-title {
+  text-align: center;
+  color: var(--third) !important;
+}

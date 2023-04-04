@@ -33,10 +33,11 @@ class HomeController extends AbstractController
 
         $categories = $categoriesRepository->findAll();
 
-        $productBestSeller = $repoProduct->findBy([
-            'isBestSeller' => true,
-            'isActive' => true
-        ]);
+        $productBestSeller = $repoProduct->findBy(
+            ['isBestSeller' => true, 'isActive' => true],
+            ['id' => 'DESC'],
+            3
+        );
         $productNewArrival = $repoProduct->findBy([
             'isNewArrival' => true,
             'isActive' => true
@@ -69,8 +70,10 @@ class HomeController extends AbstractController
      /**
      * @Route("/search", name="search_products")
      */
-    public function searchProducts(Request $request, ProductRepository $productRepository)
+    public function searchProducts(Request $request, ProductRepository $productRepository, CategoriesRepository $categoriesRepository)
     {
+        $categories = $categoriesRepository->findAll();
+
         $searchTerm = $request->query->get('search');
         $products = $productRepository->createQueryBuilder('p')
             ->where('p.name LIKE :searchTerm OR p.description LIKE :searchTerm')
@@ -81,6 +84,7 @@ class HomeController extends AbstractController
         return $this->render('home/search.html.twig', [
             'products' => $products,
             'searchTerm' => $searchTerm,
+            'categories' => $categories
         ]);
     }
 

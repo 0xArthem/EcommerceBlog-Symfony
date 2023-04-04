@@ -20,12 +20,21 @@
 		</div>
 
 		<br><br>
-		<p>Tous les produits BestSeller</p>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for product in productBestSeller %}
-				{{ include('include/product.html.twig', {'product': product})}}
-			{% endfor %}
-		</div>
+		<section class="section-best-seller bg-light">
+			<div class="container">
+				<h2 class="best-seller-section-title">
+					<i class="fas fa-trophy"></i>
+				</h2>
+
+				<br>
+
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					{% for product in productBestSeller %}
+						{{ include('include/product.html.twig', {'product': product})}}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
 
 		<br><br>
 		<p>Tous les produits New Arrival</p>
