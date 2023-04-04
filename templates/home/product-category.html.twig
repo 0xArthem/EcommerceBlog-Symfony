@@ -12,14 +12,15 @@
 			<p>{{ category.description|raw }}</p>
 		{% endif %}
 
-		{% if category.image %}
-			<img src="/assets/images/{{ category.image }}" alt="{{ category.name }}">
-		{% endif %}
+		{# {% if category.image %}<img src="/assets/images/{{ category.image }}" alt="{{ category.name }}">{% endif %} #}
 
-
-		{% for product in products %}
-			{% include "include/product.html.twig" %}
-		{% endfor %}
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for product in products %}
+				<a href="{{ path('product', {'slug':product.slug}) }}">
+					{% include "include/product.html.twig" %}
+				</a>
+			{% endfor %}
+		</div>
 
 		<div class="navigation">
 			{{ knp_pagination_render(products) }}

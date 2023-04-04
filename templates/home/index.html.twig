@@ -9,15 +9,7 @@
 
 		<p>Tous les produits</p>
 
-		<form class="form-inline my-4" method="get" action="{{ path('search_products') }}">
-			<div class="input-group">
-				<label for="search" class="sr-only">Rechercher :</label>
-				<input type="text" class="form-control" id="search" name="search" placeholder="Entrez un mot-clé">
-				<div class="input-group-append">
-					<button type="submit" class="btn btn-dark p-3">Rechercher</button>
-				</div>
-			</div>
-		</form>
+		{% include "include/formulaire-product.html.twig" %}
 
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			{% for product in products %}
