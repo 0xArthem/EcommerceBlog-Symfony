@@ -5,32 +5,17 @@
 
 {% block body %}
 	<div>
-		<h1>Accueil</h1>
+		<section class="my-5">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					{% include "include/article.html.twig" %}
+					{# <div class="text-center mt-4"><a href="{{ path('articles') }}" class="btn btn-primary">Voir tous les articles</a></div> #}
+				</div>
 
-		<section>
-			<h2>Section BLOG</h2>
-
-			<h4>Tous les articles</h4>
-			{% for article in articles %}
-				<a href="{{ path('article', {'slug':article.slug}) }}">
-					{{ article.title }}
-					-
-					{{ article.category.name }}
-				</a>
-				<p>
-					{{ article.description|raw }}
-				</p>
-			{% endfor %}
-
-			<a href="{{ path('articles') }}">Voir tous les articles</a>
-
-			<h4>Toutes les catégories des articles</h4>
-			{% for articlesCategorie in articlesCategories %}
-				<a href="{{ path('article_category', {'slug':articlesCategorie.slug}) }}">
-					{{ articlesCategorie.name }}
-				</a>
-			{% endfor %}
-
+				<div class="col-md-4 mx-auto">
+					{% include "include/home-categories.html.twig" %}
+				</div>
+			</div>
 		</section>
 
 

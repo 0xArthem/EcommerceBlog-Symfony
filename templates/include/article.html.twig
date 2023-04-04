@@ -1,0 +1,28 @@
+{% set mois = ["", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"] %}
+{% for article in articles %}
+	<a href="{{ path('article', {'slug':article.slug}) }}">
+		<div class="card mb-5 card-article shadow">
+			<div class="card-body card-body-cascade">
+				<p class="card-text">
+					<button class="btn card-text-article-category">
+						<i class="fas fa-caret-right me-1"></i>
+						{{ article.category }}
+					</button>
+				</p>
+
+				<h4 class="card-title card-title-article">
+					{{ article.title }}
+				</h4>
+				<p class="card-text text-dark">
+					<i class="far fa-clock me-1"></i>
+					Publié le
+					{{ article.createdAt|date('j ') ~ mois[article.createdAt|date('n')] ~ article.createdAt|date(' Y') }}
+				</p>
+
+				<p class="card-text card-text-article">
+					{{ article.description|striptags|length > 350 ? article.description|striptags|slice(0, 350) ~ '...' : article.description|striptags }}
+				</p>
+			</div>
+		</div>
+	</a>
+{% endfor %}

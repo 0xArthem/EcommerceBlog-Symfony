@@ -52,7 +52,7 @@ class HomeController extends AbstractController
 
         /*** blog */
 
-        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'), 3, 0);
+        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'), 1, 0);
         $articlesCategories = $articleCategoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [

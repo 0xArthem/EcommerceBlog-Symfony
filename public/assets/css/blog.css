@@ -1,0 +1,39 @@
+/** CATEGORIES **/
+.badge-length-articles {
+  border-radius: 100% !important;
+  background-color: var(--third) !important;
+  color: var(--fourth) !important;
+  font-weight: normal !important;
+}
+.list-group-categories {
+  background-color: var(--fourth) !important;
+  border: none !important;
+  padding: 15px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+/** ARTICLE **/
+.card-title-article {
+  color: var(--main) !important;
+}
+.card-text-article {
+  text-align: left !important;
+  color: var(--main) !important;
+}
+.card-text-article-category {
+  border-radius: 5px !important;
+  text-transform: none !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+  background-color: var(--third) !important;
+  color: var(--fourth) !important;
+
+  margin-bottom: 15px !important;
+}
+.card-article {
+  border-radius: 5px !important;
+}
+.card-title-article {
+  margin-top: -13.5px !important;
+}

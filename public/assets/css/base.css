@@ -49,6 +49,11 @@
 .fa-trash {
   color: var(--third) !important;
 }
-#navbarCenteredExample {
-  margin-left: 45px !important;
+.fa-trash:hover {
+  color: var(--main) !important;
+}
+/** BODY**/
+body {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
 }

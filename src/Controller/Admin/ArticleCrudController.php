@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -41,7 +42,8 @@ class ArticleCrudController extends AbstractCrudController
                 ->setUploadDir('./public/assets/images/')
                 ->setRequired(false)
                 ->setLabel('Image'),
-            BooleanField::new('isActive')->setLabel('Actif')
+            BooleanField::new('isActive')->setLabel('Actif'),
+            DateTimeField::new('createdAt')->setLabel('Date de création')
         ];
     }
 }
