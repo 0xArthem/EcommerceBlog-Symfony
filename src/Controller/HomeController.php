@@ -14,41 +14,58 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    private $repoProduct;
+    private $categoriesRepository;
+    private $paginator;
+
+    private $articleCategoryRepository;
+    private $articleRepository;
+
+    public function __construct(ArticleCategoryRepository $articleCategoryRepository,
+    ArticleRepository $articleRepository, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository, PaginatorInterface $paginator)
+    {
+        $this->repoProduct = $repoProduct;
+        $this->categoriesRepository = $categoriesRepository;
+        $this->paginator = $paginator;
+        $this->articleCategoryRepository = $articleCategoryRepository;
+        $this->articleRepository = $articleRepository;
+    }
+
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ArticleCategoryRepository $articleCategoryRepository, ArticleRepository $articleRepository, ProductRepository $repoProduct, CategoriesRepository $categoriesRepository , PaginatorInterface $paginator, Request $request): Response
+    public function index(Request $request): Response
     {
-        $query = $repoProduct->findBy(array('isActive' => true), array('id' => 'DESC'));
-        $products = $paginator->paginate(
+        $query = $this->repoProduct->findBy(array('isActive' => true), array('id' => 'DESC'));
+        $products = $this->paginator->paginate(
             $query,
             $request->query->get('page', 1),
             12
         );
 
-        $categories = $categoriesRepository->findAll();
+        $categories = $this->categoriesRepository->findAll();
 
-        $productBestSeller = $repoProduct->findBy(
+        $productBestSeller = $this->repoProduct->findBy(
             ['isBestSeller' => true, 'isActive' => true],
             ['id' => 'DESC'],
             3
         );
-        $productNewArrival = $repoProduct->findBy([
+        $productNewArrival = $this->repoProduct->findBy([
             'isNewArrival' => true,
             'isActive' => true
         ]);
-        $productFeatured = $repoProduct->findBy([
+        $productFeatured = $this->repoProduct->findBy([
             'isFeatured' => true,
             'isActive' => true]);
-        $productSpecialOffer = $repoProduct->findBy([
+        $productSpecialOffer = $this->repoProduct->findBy([
             'isSpecialOffer' => true,
             'isActive' => true
         ]);
 
         /*** blog */
 
-        $articles = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'), 1, 0);
-        $articlesCategories = $articleCategoryRepository->findAll();
+        $articles = $this->articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'), 1, 0);
+        $articlesCategories = $this->articleCategoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'products' => $products,

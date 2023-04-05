@@ -69,7 +69,7 @@ class EcomController extends AbstractController
     /**
      * @Route("/boutique/product/category/{slug}", name="product_category")
      */
-    public function product_category($slug, PaginatorInterface $paginator, Request $request): Response
+    public function product_category($slug, Request $request): Response
     {
         $category = $this->categoriesRepository->findOneBySlug($slug);
 
@@ -83,7 +83,7 @@ class EcomController extends AbstractController
         ->getQuery()
         ->getResult();
 
-        $products = $paginator->paginate(
+        $products = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
             12

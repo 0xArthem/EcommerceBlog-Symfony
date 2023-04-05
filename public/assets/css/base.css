@@ -16,6 +16,10 @@
   padding-left: 25px !important;
   padding-right: 25px !important;
 }
+.navbar-nav-link-active {
+  color: var(--third) !important;
+  /* font-weight: bold !important; */
+}
 .badge-quantity-cart {
   background-color: var(--third) !important;
   font-weight: normal !important;

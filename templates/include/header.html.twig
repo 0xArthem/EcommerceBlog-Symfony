@@ -10,18 +10,38 @@
 		</button>
 
 		<!-- Collapsible wrapper -->
+		{% set route_name = app.request.attributes.get('_route') %}
 		<div
 			class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
 			<!-- Left links -->
 			<ul class="navbar-nav mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link navbar-nav-link" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+					{% if route_name == "app_home" %}
+						<a class="nav-link navbar-nav-link navbar-nav-link-active" aria-current="page" href="{{ path('app_home') }}">
+							<i class="fas fa-caret-right me-2 text-dark"></i>
+							Accueil
+						</a>
+					{% else %}
+						<a class="nav-link navbar-nav-link" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+					{% endif %}
 				</li>
 				<li class="nav-item">
-					<a class="nav-link navbar-nav-link" href="{{ path('app_ecom') }}">Boutique</a>
+					{% if route_name == "app_ecom" %}
+						<a class="nav-link navbar-nav-link navbar-nav-link-active" aria-current="page" href="{{ path('app_ecom') }}">
+							<i class="fas fa-caret-right me-2 text-dark"></i>Boutique
+						</a>
+					{% else %}
+						<a class="nav-link navbar-nav-link" aria-current="page" href="{{ path('app_ecom') }}">Boutique</a>
+					{% endif %}
 				</li>
 				<li class="nav-item">
-					<a class="nav-link navbar-nav-link" href="{{ path('app_blog') }}">Blog</a>
+					{% if route_name == "app_blog" %}
+						<a class="nav-link navbar-nav-link navbar-nav-link-active" aria-current="page" href="{{ path('app_blog') }}">
+							<i class="fas fa-caret-right me-2 text-dark"></i>Blog
+						</a>
+					{% else %}
+						<a class="nav-link navbar-nav-link" aria-current="page" href="{{ path('app_blog') }}">Blog</a>
+					{% endif %}
 				</li>
 			</ul>
 			<!-- Left links -->
@@ -106,9 +126,5 @@
 					<i class="fas fa-user ms-1 text-dark"></i>
 				</a>
 			{% endif %}
-		</div>
-		<!-- Right elements -->
-	</div>
-	<!-- Container wrapper -->
-</nav>
+		</div><!-- Right elements --></div><!-- Container wrapper --></nav>
 <!-- Navbar -->

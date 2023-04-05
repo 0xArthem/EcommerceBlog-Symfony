@@ -64,12 +64,12 @@ class BlogController extends AbstractController
      /**
      * @Route("/blog/articles/category/{slug}", name="article_category")
      */
-    public function article_category($slug, Request $request, PaginatorInterface $paginator): Response
+    public function article_category($slug, Request $request): Response
     {
         $articlesCategorie = $this->articleCategoryRepository->findOneBySlug($slug);
         $articles = $this->articleRepository->findByCategory($articlesCategorie, ['id' => 'DESC']);
 
-        $pagination = $paginator->paginate(
+        $pagination = $this->paginator->paginate(
             $articles,
             $request->query->getInt('page', 1),
             12
@@ -84,10 +84,10 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/articles", name="articles")
      */
-    public function articles(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
+    public function articles(Request $request): Response
     {
-        $query = $articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'));
-        $articles = $paginator->paginate(
+        $query = $this->articleRepository->findBy(array('isActive' => true), array('id' =>'DESC'));
+        $articles = $this->paginator->paginate(
             $query,
             $request->query->get('page', 1),
             12
