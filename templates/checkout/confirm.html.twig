@@ -8,91 +8,110 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<div>
-			<h1>Checkout</h1>
+	<div class="py-5">
+		<div class="container my-5">
+			<h1 class="mb-4 text-center">Récapitulatif de ma commande</h1>
 
-			<h2>Votre adresse</h2>
-			{{ address | replace({"[spr]" : "<br>"}) | raw }}
+			<br><br>
 
-			<h2>Votre transporteur</h2>
-			{{ carrier | replace({"[spr]" : "<br>"}) | raw }}
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card shadow">
+						<div class="card-body h-100">
+							<p class="card-text">{{ address | replace({"[spr]" : "<br>"}) | raw }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card shadow">
+						<div class="card-body h-100">
+							<p class="card-text">{{ carrier | replace({"[spr]" : "<br>"}) | raw }}</p>
+						</div>
+					</div>
+				</div>
+				{% if information %}
+					<div class="col-md-4">
+						<div class="card shadow">
+							<div class="card-body h-100">
+								<p class="card-text">{{ information | raw }}</p>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
 
-			<h2>Informations aditionnelles</h2>
-			{% if information %}
-				{{ information | raw }}
-			{% endif %}
+			<br><br>
 
-
-			<h2>Votre commande</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Produit</th>
-						<th>Prix</th>
-						<th>Quantité</th>
-						<th>Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for element in cart.products %}
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="table-secondary">
 						<tr>
-							<td>
-								{{ element.product.name }}
-							</td>
-							<td>
-								{{ element.product.price }}
-							</td>
-							<td>
-								{{ element.quantity }}
-							</td>
-							<td>
-								{{ element.quantity * (element.product.price) }}
-							</td>
+							<th scope="col">Produit</th>
+							<th scope="col">Prix</th>
+							<th scope="col">Quantité</th>
+							<th scope="col">Total</th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<table>
-				<tbody>
-					<tr>
-						<td>
-							Panier total
-						</td>
-						<td>
-							{{ cart.data.subTotalHT }}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Taxe (20%)
-						</td>
-						<td>
-							{{ cart.data.taxe }}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Livraison
-							{{ carrier.name }}
-						</td>
-						<td>
-							{{ carrier.price / 100 }}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Total TTC
-						</td>
-						<td>
-							{{ cart.data.subTotalTTC + (carrier.price / 100) }}
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{% for element in cart.products %}
+							<tr>
+								<td>{{ element.product.name }}</td>
+								<td>{{ element.product.price }}</td>
+								<td>{{ element.quantity }}</td>
+								<td>{{ element.quantity * (element.product.price) }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 
+			<br>
+
+			<div class="row justify-content-end">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-hover">
+								<tbody>
+									<tr>
+										<td>Panier total</td>
+										<td class="text-right">{{ cart.data.subTotalHT }}
+											€</td>
+									</tr>
+									<tr>
+										<td>Taxe (20%)</td>
+										<td class="text-right">{{ cart.data.taxe }}
+											€</td>
+									</tr>
+									<tr>
+										<td>Livraison
+											{{ carrier.name }}</td>
+										<td class="text-right">{{ carrier.price / 100 }}
+											€</td>
+									</tr>
+									<tr>
+										<td>
+											<strong>Total TTC</strong>
+										</td>
+										<td class="text-right">
+											<strong>{{ cart.data.subTotalTTC + (carrier.price / 100) }}
+												€</strong>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
 			{# <form action="{{ path('create-checkout-session') }}" method="POST" enctype="multipart/form-data"> #}
-			<button type="submit" id="checkout-button">Checkout</button>
+			<div class="d-flex justify-content-end">
+				<button type="submit" class="btn btn-voir-fiche-produit" id="checkout-button">
+					Payer
+					<i class="fas fa-right-long text-dark ms-3"></i>
+				</button>
+			</div>
 			{# </form> #}
 
 		</div>

@@ -8,7 +8,9 @@
 				</button>
 			</h5>
 			<h5 class="card-title mb-2">{{ product.name }}</h5>
-			<p class="card-text">{{ product.description|raw }}</p>
+			<p class="card-text">
+				{{ product.description|striptags|length > 190 ? product.description|striptags|slice(0, 190) ~ '...' : product.description|striptags }}
+			</p>
 			<div class="d-flex justify-content-center align-items-center">
 				<button class="btn btn-voir-fiche-produit mx-1" type="button">
 					Consulter la fiche produit
