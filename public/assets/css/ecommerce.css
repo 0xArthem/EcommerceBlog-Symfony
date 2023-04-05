@@ -98,3 +98,37 @@
   padding-bottom: 45px;
   padding-top: 45px;
 }
+
+/** PAGE PRODUIT **/
+.fa-seedling {
+  color: var(--second) !important;
+}
+.img-product-individual {
+  border-radius: 5px !important;
+}
+.section-droite-page-produit {
+  padding: 25px;
+  border-radius: 5px !important;
+}
+.last-price-carte-produit {
+  text-decoration: line-through;
+  text-decoration-color: #e7b07c;
+  text-decoration-thickness: 2px;
+  font-size: 25px;
+}
+.icon-right-reduction {
+  color: var(--third);
+}
+.btn-review-note {
+  background-color: var(--third) !important;
+  color: var(--fourth) !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  letter-spacing: 1px !important;
+}
+#div-center-page-produit {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 45px;
+  padding-top: 60px;
+}

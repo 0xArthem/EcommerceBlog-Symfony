@@ -4,102 +4,150 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1 class="font-weight-bold">
-			Produit
+	<div class="container py-5 text-dark">
+		{% if product.lastPrice %}
+			<h5 class="text-center">
+				{% set discountPercent = ((product.lastPrice - product.price) / product.lastPrice * 100) %}
+				<p>
+					<i class="fas fa-caret-right me-1 icon-right-reduction"></i>
+					{{ discountPercent|round(0) }}% de réduction !
+				</p>
+			</h5>
+		{% endif %}
+
+		<h1 class="text-center">
 			{{ product.name }}
+			<i class="fas fa-seedling mx-1"></i>
+			{% if product.lastPrice %}
+				<span class="last-price-carte-produit">{{ product.lastPrice }}&euro;</span>
+			{% endif %}
+			{{ product.price }}&euro;
+			<br>
+
+			{% for category in product.category %}
+				<a href="{{ path('product_category', {'slug':category.slug}) }}" class="btn btn-dark btn-rounded me-2 btn-form-category-name">
+					{{ category.name }}
+				</a>
+			{% endfor %}
 		</h1>
+
+		<br><br>
 
 		<div class="row">
 			<div class="col-md-6">
 				{% if product.image %}
-					<img class="img-fluid" src="/assets/images/{{ product.image }}" alt="{{ product.name }}">
+					<img class="img-fluid img-product-individual" src="/assets/images/{{ product.image }}" alt="{{ product.name }}">
 				{% endif %}
+
+				<br><br>
+
+				<section class="shadow bg-light section-droite-page-produit">
+					<p>
+						{{ product.description|raw }}
+					</p>
+				</section>
 			</div>
 			<div class="col-md-6 mt-4 mt-md-0">
-				<div class="d-flex justify-content-end mb-2">
-					<a href="{{ path('cart_add', {'id':product.id}) }}" class="btn btn-primary">
-						Ajouter au panier
-					</a>
-				</div>
+				<section>
+					{% if product.isBestSeller == true %}
+						<span class="badge badge-light ml-2 me-1">
+							Best-seller
+						</span>
+					{% endif %}
+					{% if product.isNewArrival == true %}
+						<span class="badge badge-light ml-2 me-1">
+							New arrival
+						</span>
+					{% endif %}
+					{% if product.isFeatured == true %}
+						<span class="badge badge-light ml-2 me-1">
+							Vedette
+						</span>
+					{% endif %}
+					{% if product.isSpecialOffer == true %}
+						<span class="badge badge-light ml-2 me-1">
+							Special offer
+						</span>
+					{% endif %}
 
-				{% for category in product.category %}
-					<a href="{{ path('product_category', {'slug':category.slug}) }}" class="badge badge-primary mr-2">
-						{{ category.name }}
-					</a>
-				{% endfor %}
+					<div class="d-flex justify-content-start mt-2">
+						<a href="{{ path('cart_add', {'id':product.id}) }}" class="btn btn-voir-fiche-produit w-100" type="button">
+							Ajouter au panier
+							<i class="fas fa-cart-shopping ms-2 text-dark"></i>
+						</a>
+					</div>
+				</section>
 
-				{% if product.isBestSeller == true %}
-					<span class="badge badge-warning ml-2">
-						Best-seller
-					</span>
-				{% endif %}
-				{% if product.isNewArrival == true %}
-					<span class="badge badge-success ml-2">
-						New arrival
-					</span>
-				{% endif %}
-				{% if product.isFeatured == true %}
-					<span class="badge badge-info ml-2">
-						Vedette
-					</span>
-				{% endif %}
-				{% if product.isSpecialOffer == true %}
-					<span class="badge badge-danger ml-2">
-						Special offer
-					</span>
-				{% endif %}
+				<br>
 
-				<p class="mt-3">
-					{{ product.description|raw }}
-				</p>
-				<p>
-					{{ product.moreInformations|raw }}
-				</p>
-				<h3 class="mt-3">{{ product.price }}&euro;</h3>
-				{% if product.lastPrice %}
-					<h5 style="text-decoration: line-through;">{{ product.lastPrice }}&euro;</h5>
-					{% set discountPercent = ((product.lastPrice - product.price) / product.lastPrice * 100) %}
-					<p>{{ discountPercent|round(0) }}% de réduction !</p>
-				{% endif %}
+				<section class="shadow bg-light section-droite-page-produit">
+					<p class="mt-3">
+						{{ product.moreInformations|raw }}
+					</p>
+				</section>
+			</div>
 
-				{% if product.reviewsProducts is not empty %}
-					<section class="mt-5">
-						<h3>Les avis</h3>
+			<div id="div-center-page-produit">
+				<i class="fas fa-angle-down"></i>
+			</div>
 
+			<div>
+				<div class="row">
+					{% if product.reviewsProducts is not empty %}
 						{% for review in product.reviewsProducts %}
 							{% if review.isActive %}
-								<div class="media mt-3">
-									<img src="/assets/images/default-avatar.png" class="mr-3" alt="Avatar" width="50">
-									<div class="media-body">
-										<h5 class="mt-0">{{ review.user.username }}</h5>
-										<p>{{ review.comment|raw }}</p>
-										<div class="d-flex justify-content-between">
-											<p class="mb-0">{{ review.note }}/5</p>
-											<p class="mb-0">{{ review.createdAt|date('d/m/Y') }}</p>
+								<div class="col-md-12">
+									<div class="card mb-4 bg-light">
+										<div class="card-body">
+											<div class="d-flex justify-content-between align-items-center">
+												<h5 class="card-title mb-0 text-capitalize">
+													{{ review.user.username }}
+												</h5>
+
+												<span class="btn btn-rounded btn-review-note">
+													{{ review.note }}/5
+												</span>
+											</div>
+											<p class="card-text mt-3">
+												<i class="fas fa-quote-left"></i>
+												{{ review.comment|raw }}
+											</p>
 										</div>
 									</div>
 								</div>
 							{% endif %}
 						{% endfor %}
+					{% endif %}
+				</div>
 
-					</section>
-				{% else %}
-					<h3>Aucun avis disponible pour le moment.</h3>
-				{% endif %}
+
 				{% if app.user %}
-					<section>
-						{{ form_start(form) }}
-						{{ form_row(form.note) }}
-						{{ form_row(form.comment) }}
-						<button type="submit" class="btn btn-primary">Envoyer</button>
-						{{ form_end(form) }}
-					</section>
+					<div class="row mt-4">
+						<div class="col-md-12">
+							<h4 class="mb-3">Laissez votre avis</h4>
+							{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+							<div class="col-md-12">
+								{{ form_row(form.note, {'attr': {'class': 'form-control'}}) }}
+							</div>
+							<div class="col-md-12">
+								{{ form_row(form.comment, {'attr': {'class': 'form-control'}}) }}
+							</div>
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-voir-fiche-produit">Envoyer</button>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
 				{% else %}
-					<a href="{{ path('app_login') }}">Connectez-vous</a>
+					<div class="row mt-4">
+						<div class="col-md-12">
+							<p class="text-muted">Connectez-vous pour laisser un avis.</p>
+							<a href="{{ path('app_login') }}" class="btn btn-voir-fiche-produit">Se connecter</a>
+						</div>
+					</div>
 				{% endif %}
 
 			</div>
+
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}
