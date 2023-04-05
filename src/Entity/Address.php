@@ -64,14 +64,16 @@ class Address
 
     public function __toString()
     {
-        $result = $this->fullName . "[spr]";
+        $result = $this->fullName . " : ";
         if ($this->getCompany()) {
-            $result .= $this->company . "[spr]";
+            $result .= $this->company . "- ";
         }
-        // $result .= $this->address . "[spr]";
-        // $result .= $this->complement . "[spr]";
-        // $result .= $this->codePostal . "[spr]";
-        // $result .= $this->country . "[spr]";
+        $result .= $this->address . " - ";
+        if ($this->getComplement()) {
+            $result .= $this->complement . " - ";
+        }
+        $result .= $this->codePostal . " - ";
+        $result .= $this->country . ".";
 
         return $result;
     }

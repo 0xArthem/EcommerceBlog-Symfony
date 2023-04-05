@@ -16,15 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AddressController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_address_index", methods={"GET"})
-     */
-    public function index(AddressRepository $addressRepository): Response
-    {
-        return $this->render('address/index.html.twig', [
-            'addresses' => $addressRepository->findAll(),
-        ]);
-    }
+   /**
+ * @Route("/", name="app_address_index", methods={"GET"})
+ */
+public function index(AddressRepository $addressRepository): Response
+{
+    $user = $this->getUser();
+
+    $addresses = $addressRepository->findBy(['user' => $user]);
+
+    return $this->render('address/index.html.twig', [
+        'addresses' => $addresses,
+    ]);
+}
 
     /**
      * @Route("/new", name="app_address_new", methods={"GET", "POST"})

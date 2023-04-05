@@ -104,6 +104,9 @@ class CheckoutController extends AbstractController
             ]);
         }
 
-        return $this->redirectToRoute('app_home');
+        if ($user) {
+            return $this->redirectToRoute('app_home');
+        }
+        // return $this->redirectToRoute('app_home');
     }
 }

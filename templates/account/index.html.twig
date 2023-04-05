@@ -85,8 +85,9 @@
 								<div class="mb-3">
 									<p class="mb-0">{{ order.carrierName }}
 										-
-										{{ order.carrierPrice }}&euro;</p>
-									<p class="mb-0">{{ order.deliveryAddress }}</p>
+										{{ order.carrierPrice / 100 }}&euro;
+									</p>
+									<p class="mb-0">{{ order.fullName }}</p>
 									<p class="mb-0">{{ order.moreInformations }}</p>
 								</div>
 								<table class="table table-bordered bg-light">
