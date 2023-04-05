@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EcomController!
+{% endblock %}
+
+{% block body %}
+	<div class="pt-5">
+		<section class="section-formulaire">
+			{% include "include/formulaire-product.html.twig" %}
+		</section>
+
+		<section class="section-affichage-produits">
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+				{% for product in products %}
+					<a href="{{ path('product', {'slug':product.slug}) }}">
+						{% include "include/product.html.twig" %}
+					</a>
+				{% endfor %}
+			</div>
+
+			<div class="navigation">
+				{{ knp_pagination_render(products) }}
+			</div>
+		</section>
+
+		<br><br><br><br>
+
+		<section class="py-5 section-offres-speciales">
+			<div class="container py-1">
+				<section class="section-title-offres-speciales bg-light shadow">
+					<h2 class="text-center titre-offres-speciales">
+						Nos
+						<span class="span-titre-offres-speciales">offres spéciales</span>
+						du mois
+						<i class="fas fa-gifts ms-1"></i>
+					</h2>
+				</section>
+
+				<div id="div-center-offres-speciales">
+					<i class="fas fa-angle-down"></i>
+				</div>
+
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					{% for product in productSpecialOffer %}
+						<a href="{{ path('product', {'slug':product.slug}) }}">
+							{% include "include/product.html.twig" %}
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<section class="section-best-seller bg-light">
+			<div class="container">
+				<h2 class="best-seller-section-title">
+					<i class="fas fa-trophy"></i>
+				</h2>
+
+				<br>
+
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					{% for product in productBestSeller %}
+						<a href="{{ path('product', {'slug':product.slug}) }}">
+							{{ include('include/product.html.twig', {'product': product})}}
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

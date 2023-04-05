@@ -61,3 +61,9 @@ body {
   margin-left: 112.5px !important;
   margin-bottom: 25px !important;
 }
+
+.navigation {
+  padding-top: 15px !important;
+  display: flex !important;
+  justify-content: center !important;
+}

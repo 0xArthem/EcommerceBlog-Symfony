@@ -19,6 +19,24 @@
   padding-top: 60px;
 }
 
+.section-second-blog {
+  background-image: linear-gradient(
+    135deg,
+    #fff 25%,
+    var(--second) 25%,
+    var(--second) 50%,
+    #fff 50%,
+    #fff 75%,
+    var(--second) 75%,
+    var(--second) 100%
+  );
+  background-size: 15px 15px;
+  background-color: #f8f9fa;
+  padding-left: 55px !important;
+  padding-right: 55px !important;
+  padding-top: 60px;
+}
+
 /** ARTICLE **/
 .card-title-article {
   color: var(--main) !important;
