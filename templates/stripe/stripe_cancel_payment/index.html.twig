@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StripeCancelPaymentController!{% endblock %}
+{% block title %}Paiement échoué
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/ecommerce-starter/src/Controller/Stripe/StripeCancelPaymentController.php'|file_link(0) }}">src/Controller/Stripe/StripeCancelPaymentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/ecommerce-starter/templates/stripe/stripe_cancel_payment/index.html.twig'|file_link(0) }}">templates/stripe/stripe_cancel_payment/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card shadow">
+					<div class="card-body text-center">
+						<h1 class="mb-4">Paiement échoué</h1>
+						<p class="lead mb-4">Votre paiement n'a pas été validé. Veuillez réessayer ou contacter notre service client pour plus d'informations.</p>
+						<a href="{{ path('app_home') }}" class="btn btn-voir-fiche-produit">Retourner sur le site</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

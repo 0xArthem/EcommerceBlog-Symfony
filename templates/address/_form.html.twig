@@ -1,11 +1,44 @@
-{{ form_start(form) }}
-{{ form_row(form.fullName) }}
-{{ form_row(form.company) }}
-{{ form_row(form.address) }}
-{{ form_row(form.complement) }}
-{{ form_row(form.phone) }}
-{{ form_row(form.city) }}
-{{ form_row(form.codePostal) }}
-{{ form_row(form.country) }}
-{{ form_row(form.submit) }}
+{{ form_start(form, {'attr': {'class': 'container'}}) }}
+<div class="row">
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.fullName, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.company, {'attr': {'class': 'form-control'}}) }}
+	</div>
+</div>
+
+<div class="mb-4">
+	{{ form_row(form.address, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="mb-4">
+	{{ form_row(form.complement, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="row">
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.phone, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.city, {'attr': {'class': 'form-control'}}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.codePostal, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="col-md-6 mb-4">
+		{{ form_row(form.country, {'attr': {'class': 'form-control'}}) }}
+	</div>
+</div>
+
+<div class="text-center">
+	{{ form_row(form.submit, {'attr': {'class': 'btn btn-voir-fiche-produit'}}) }}
+</div>
+
 {{ form_end(form) }}

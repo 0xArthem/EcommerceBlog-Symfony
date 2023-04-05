@@ -1,37 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes adresse
+{% block title %}Mes adresses
 {% endblock %}
 
 {% block body %}
-	<h1>Mes adresses</h1>
+	<div class="container">
+		<br><br>
+		<h1 class="text-center mb-4">Mes adresses</h1>
+		<br><br>
 
-	<table class="table">
-		<tbody>
-			{% for address in addresses %}
-				<tr>
-					<td>{{ address.fullName }}</td>
-					<td>{{ address.company }}</td>
-					<td>{{ address.address|raw }}</td>
-					<td>{{ address.complement }}</td>
-					<td>{{ address.phone }}</td>
-					<td>{{ address.city }}</td>
-					<td>{{ address.codePostal }}</td>
-					<td>{{ address.country }}</td>
-					<td>
-						<a href="{{ path('app_address_show', {'id': address.id}) }}">Voir les détails</a>
-						<a href="{{ path('app_address_edit', {'id': address.id}) }}">Editer</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="10">Vous n'avez pas encoré enregistré d'adresse.</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-	<br>
-
-	<a href="{{ path('app_address_new') }}">Enregistrer une adresse</a>
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Société</th>
+							<th>Adresse</th>
+							<th>Complément</th>
+							<th>Téléphone</th>
+							<th>Ville</th>
+							<th>Code postal</th>
+							<th>Pays</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for address in addresses %}
+							<tr>
+								<td>{{ address.fullName }}</td>
+								<td>{{ address.company }}</td>
+								<td>{{ address.address|raw }}</td>
+								<td>{{ address.complement }}</td>
+								<td>{{ address.phone }}</td>
+								<td>{{ address.city }}</td>
+								<td>{{ address.codePostal }}</td>
+								<td>{{ address.country }}</td>
+								<td>
+									<a href="{{ path('app_address_edit', {'id': address.id}) }}" class="btn btn-voir-fiche-produit">
+										Éditer
+									</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="9">Vous n'avez pas encore enregistré d'adresse.</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="text-end">
+					<a href="{{ path('app_address_new') }}" class="btn btn-voir-fiche-produit">Enregistrer une nouvelle adresse</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -1,17 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StripeSuccessPaymentController!
+{% block title %}Paiement réussi
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Paiement réussi !</h1>
-
-		<p>
-			Merci pour votre commande
-		</p>
-
-
-		<a href="{{ path('app_home') }}">Retourner sur le site</a>
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<h1 class="text-center my-5">Paiement réussi !</h1>
+						<p class="text-center">Merci pour votre commande</p>
+						<div class="text-center mt-5">
+							<a href="{{ path('app_home') }}" class="btn btn-voir-fiche-produit">Retourner sur le site</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock %}

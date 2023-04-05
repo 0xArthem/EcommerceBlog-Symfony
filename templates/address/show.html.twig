@@ -4,47 +4,60 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Adresse</h1>
+	<div class="container">
+		<br><br>
+		<h1 class="text-center mb-4">Mon adresse</h1>
+		<br><br>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<td>{{ address.id }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.fullName }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.company }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.address|raw }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.complement }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.phone }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.city }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.codePostal }}</td>
-			</tr>
-			<tr>
-				<td>{{ address.country }}</td>
-			</tr>
-		</tbody>
-	</table>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<td>{{ address.id }}</td>
+				</tr>
+				<tr>
+					<th>Nom complet</th>
+					<td>{{ address.fullName }}</td>
+				</tr>
+				<tr>
+					<th>Société</th>
+					<td>{{ address.company }}</td>
+				</tr>
+				<tr>
+					<th>Adresse</th>
+					<td>{{ address.address|raw }}</td>
+				</tr>
+				<tr>
+					<th>Complément</th>
+					<td>{{ address.complement }}</td>
+				</tr>
+				<tr>
+					<th>Téléphone</th>
+					<td>{{ address.phone }}</td>
+				</tr>
+				<tr>
+					<th>Ville</th>
+					<td>{{ address.city }}</td>
+				</tr>
+				<tr>
+					<th>Code postal</th>
+					<td>{{ address.codePostal }}</td>
+				</tr>
+				<tr>
+					<th>Pays</th>
+					<td>{{ address.country }}</td>
+				</tr>
+			</tbody>
+		</table>
 
-	<br>
+		<br>
 
-	<a href="{{ path('app_address_index') }}">Retour</a>
+		<div class="text-center">
+			<a href="{{ path('app_address_index') }}" class="btn btn-voir-fiche-produit">Retour</a>
 
-	<br>
+			<a href="{{ path('app_address_edit', {'id': address.id}) }}" class="btn btn-voir-fiche-produit">Editer</a>
+		</div>
 
-	<a href="{{ path('app_address_edit', {'id': address.id}) }}">Editer</a>
-
-	{{ include('address/_delete_form.html.twig') }}
+		{{ include('address/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

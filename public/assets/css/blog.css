@@ -43,3 +43,15 @@
 .card-title-article {
   margin-top: -13.5px !important;
 }
+
+.container-article-blog {
+  background-color: var(--second);
+}
+.img-article-blog {
+  border-radius: 5px !important;
+  width: 500px;
+  z-index: 1;
+}
+.section-img-article-blog {
+  margin-top: -50px;
+}

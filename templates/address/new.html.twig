@@ -4,17 +4,26 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Enregistrer une adresse</h1>
 
-	<div class="message-flash">
-		{% for message in app.flashes('checkout_message') %}
-			<p>
-				{{ message }}
-			</p>
-		{% endfor %}
+	<div class="py-5">
+		<br>
+		<h1 class="text-dark text-center">Enregistrer une adresse</h1>
+		<br><br>
+
+		<div class="message-flash">
+			{% for message in app.flashes('checkout_message') %}
+				<p>
+					{{ message }}
+				</p>
+			{% endfor %}
+		</div>
+
+		<section class="section-retour-form">
+			<a href="{{ path('app_address_index') }}" class="btn btn-voir-fiche-produit">
+				Retour
+			</a>
+		</section>
+
+		{{ include('address/_form.html.twig') }}
 	</div>
-
-	{{ include('address/_form.html.twig') }}
-
-	<a href="{{ path('app_address_index') }}">Retour</a>
 {% endblock %}
