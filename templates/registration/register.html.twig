@@ -4,15 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Inscription</h1>
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<h1 class="h3 mb-3 font-weight-normal text-center">Inscription</h1>
+					{{ form_start(registrationForm) }}
+					<div class="mb-3">
+						{{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse e-mail'}}) }}
+					</div>
+					<div class="mb-3">
+						{{ form_row(registrationForm.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}}) }}
+              </div>
+              <div class="row">
+                <div class="col">
+                  {{ form_row(registrationForm.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                </div>
+                <div class="col">
+                  {{ form_row(registrationForm.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                </div>
+              </div>
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.username) }}
-	{{ form_row(registrationForm.firstname) }}
-	{{ form_row(registrationForm.lastname) }}
-	{{ form_row(registrationForm.plainPassword) }}
-	{{ form_row(registrationForm.agreeTerms) }}
-	{{ form_row(registrationForm.submit) }}
-	{{ form_end(registrationForm) }}
+			  <br>
+
+              <div class="mb-3">
+                {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+              </div>
+              <div class="form-check mb-3">
+                {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+              </div>
+              {{ form_row(registrationForm.submit, {'attr': {'class': 'btn btn-lg btn-voir-fiche-produit btn-block'}}) }}
+            {{ form_end(registrationForm) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
