@@ -4,80 +4,97 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Checkout</h1>
-		{{ form_start(checkout, {'action': path('checkout_confirm')}) }}
+	<div class="container py-5">
 
-		<h2>Votre adresse</h2>
-		{{ form_widget(checkout.address) | replace({"[spr]" : "<br>"}) | raw }}
+		<h1 class="mt-5 mb-4 text-center">Ma commande</h1>
 
-		<a href="{{ path('app_address_new') }}">Ajouter une nouvelle adresse</a>
+		<br><br>
+		{{ form_start(checkout, {'action': path('checkout_confirm'), 'class': 'row g-3'}) }}
 
-		<h2>Votre transporteur</h2>
-		{{ form_widget(checkout.carrier) | replace({"[spr]" : "<br>"}) | raw }}
+		<div class="row">
+			<div class="col-md-8">
+				<p class="text-dark">
+					<i class="fas fa-caret-right me-1 icon-right-reduction"></i>
+					Avez-vous des informations supplémentaires à nous confier ?
+				</p>
+				{{ form_widget(checkout.information, {'attr': {'class': 'form-control mb-3 section-checkout-form shadow'}}) }}
 
-		<h2>Informations aditionnelles</h2>
-		{{ form_widget(checkout.information) }}
+			</div>
+			{# <br> #}
 
-		<h2>Votre commande</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Produit</th>
-					<th>Prix</th>
-					<th>Quantité</th>
-					<th>Total</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for element in cart.products %}
+			<div class="col-md-4" style="margin-top:42.5px;">
+				{{ form_widget(checkout.address, {'attr': {'class': 'form-control mb-3 shadow section-checkout-form'}}) | replace({"[spr]" : "<br>"}) | raw }}
+				<a href="{{ path('app_address_new') }}" class="btn btn-voir-fiche-produit">Ajouter une nouvelle adresse</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="col-md-12">
+			{{ form_widget(checkout.carrier, {'attr': {'class': 'form-control mb-3 section-checkout-form shadow'}}) | replace({"[spr]" : "<br>"}) | raw }}
+		</div>
+
+		<br><br>
+
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead class="table-secondary">
 					<tr>
-						<td>
-							{{ element.product.name }}
-						</td>
-						<td>
-							{{ element.product.price }}
-						</td>
-						<td>
-							{{ element.quantity }}
-						</td>
-						<td>
-							{{ element.quantity * (element.product.price) }}
-						</td>
+						<th scope="col">Produit</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Quantité</th>
+						<th scope="col">Total</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<table>
-			<tbody>
-				<tr>
-					<td>
-						Panier total
-					</td>
-					<td>
-						{{ cart.data.subTotalHT }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Taxe (20%)
-					</td>
-					<td>
-						{{ cart.data.taxe }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Total TTC
-					</td>
-					<td>
-						{{ cart.data.subTotalTTC }}
-					</td>
-				</tr>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for element in cart.products %}
+						<tr>
+							<td>{{ element.product.name }}</td>
+							<td>{{ element.product.price }}</td>
+							<td>{{ element.quantity }}</td>
+							<td>{{ element.quantity * (element.product.price) }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 
-		<button type="submit">Envoyer</button>
+		<div class="row mt-3">
+			<div class="col-md-4 offset-md-8">
+				<div class="card">
+					<div class="card-body">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td class="fw-bold">Panier total</td>
+									<td class="text-end">{{ cart.data.subTotalHT }}
+										€</td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Taxe (20%)</td>
+									<td class="text-end">{{ cart.data.taxe }}
+										€</td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Total TTC</td>
+									<td class="text-end">{{ cart.data.subTotalTTC }}
+										€</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+		<section class="d-flex justify-content-end">
+			<button type="submit" class="btn btn-voir-fiche-produit">
+				Valider ma commande
+				<i class="fas fa-right-long text-dark ms-3"></i>
+			</button>
+		</section>
 		{{ form_end(checkout) }}
 
 	</div>

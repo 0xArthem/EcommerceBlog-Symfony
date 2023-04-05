@@ -1,0 +1,8 @@
+/** CHECKOUT **/
+.section-checkout-form {
+  background-color: var(--fourth) !important;
+  border: none !important;
+  padding: 25px !important;
+  border-radius: 5px !important;
+  color: var(--main) !important;
+}
