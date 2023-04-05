@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Produits par catégorie
+	<div class="container py-5">
+		<br>
+		<h1 class="text-center mb-4 text-dark">
 			{{ category.name }}
 		</h1>
 		{% if category.description %}
-			<p>{{ category.description|raw }}</p>
+			<p class="text-center">{{ category.description|raw }}</p>
 		{% endif %}
 
 		{# {% if category.image %}<img src="/assets/images/{{ category.image }}" alt="{{ category.name }}">{% endif %} #}
@@ -22,7 +23,7 @@
 			{% endfor %}
 		</div>
 
-		<div class="navigation">
+		<div class="text-center">
 			{{ knp_pagination_render(products) }}
 		</div>
 	</div>

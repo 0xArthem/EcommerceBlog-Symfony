@@ -78,6 +78,7 @@ class HomeController extends AbstractController
         $products = $productRepository->createQueryBuilder('p')
             ->where('p.name LIKE :searchTerm OR p.description LIKE :searchTerm')
             ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -167,7 +168,7 @@ class HomeController extends AbstractController
     public function article_category($slug, ArticleCategoryRepository $articleCategoryRepository, ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $articlesCategorie = $articleCategoryRepository->findOneBySlug($slug);
-        $articles = $articleRepository->findByCategory($articlesCategorie);
+        $articles = $articleRepository->findByCategory($articlesCategorie, ['id' => 'DESC']);
 
         $pagination = $paginator->paginate(
             $articles,
