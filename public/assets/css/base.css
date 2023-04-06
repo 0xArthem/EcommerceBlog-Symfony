@@ -71,3 +71,8 @@ body {
   display: flex !important;
   justify-content: center !important;
 }
+
+.form-contact {
+  padding-left: 250px !important;
+  padding-right: 250px !important;
+}

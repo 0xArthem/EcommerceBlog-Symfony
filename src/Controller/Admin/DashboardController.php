@@ -18,6 +18,7 @@ use App\Entity\ReviewsProduct;
 use App\Controller\Admin\OrderCrudController;
 use App\Entity\Article;
 use App\Entity\ArticleCategory;
+use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -74,6 +75,9 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Articles', 'fas fa-file-alt', Article::class),
                 MenuItem::linkToCrud('Catégories', 'fas fa-folder', ArticleCategory::class)
             ]);
+
+            yield MenuItem::linkToCrud('Contact', 'fas fa-envelope', Contact::class);
+
 
             // yield MenuItem::linkToCrud('RelatedProduct', 'fas fa-list', RelatedProduct::class);
             // yield MenuItem::linkToCrud('Tag', 'fas fa-list', TagsProduct::class);
