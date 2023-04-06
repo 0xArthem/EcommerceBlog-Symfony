@@ -112,7 +112,7 @@
 }
 .last-price-carte-produit {
   text-decoration: line-through;
-  text-decoration-color: #e7b07c;
+  text-decoration-color: var(--second) !important;
   text-decoration-thickness: 2px;
   font-size: 25px;
 }

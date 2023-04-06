@@ -5,6 +5,35 @@
 
 {% block body %}
 	<div class="pt-5">
+
+		<section class="section-accueil py-5">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-7 mb-4 mb-md-0">
+						<h2 class="section-accueil-title mb-4 text-dark">
+							Bienvenue chez BioSoin
+						</h2>
+						<p class="section-accueil-description mb-4">
+							Découvrez notre sélection de produits de soins bio et thérapeutiques pour vous aider à prendre soin de vous de manière naturelle.
+						</p>
+						<a href="#" class="btn btn-voir-fiche-produit btn-lg shadow" style="background-color:var(--second) !important;">
+							Découvrir notre gamme
+						</a>
+					</div>
+					<div class="col-md-4 ms-5">
+						<div class="card bg-transparent border-0">
+							<img src="https://images.unsplash.com/photo-1594325624708-75a0a6cf806f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fHNvaW4lMjBiaW98ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img shadow">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="d-flex justify-content-center pb-5 pt-3">
+			<i class="fas fa-angle-down text-dark"></i>
+		</div>
+
 		<section class="section-formulaire">
 			{% include "include/formulaire-product.html.twig" %}
 		</section>
