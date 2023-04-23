@@ -83,3 +83,14 @@ Le front-end est très basique, en effet ce qui m'a vraiment intéressé était 
 ## Page de connexion
 
 ![Capture d'écran de la page de connexion](https://i.imgur.com/rfxmJSF.png)
+
+
+# Accès compte admin
+
+Pour accéder à l'espace d'administration sécurisé, veuillez utiliser les informations de connexion suivantes :
+
+- Email : jonas@mail.fr
+- Mot de passe : Motdepasse7!
+
+Pour accéder à l'espace d'administration, la route est /admin.
+
