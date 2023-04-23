@@ -7,34 +7,6 @@
 	<div class="container form-contact">
 
 		<br><br><br>
-		{% if app.session.flashBag.has('success') %}
-			<div class="alert alert-success mt-4">
-				{% for message in app.session.flashBag.get('success') %}
-					<p>{{ message }}</p>
-				{% endfor %}
-			</div>
-		{% endif %}
-
-		<div class="row justify-content-center mt-5">
-			<p class="h4 mb-4 text-center">Nous contacter</p>
-
-			{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
-			<div class="row">
-				<div class="col-md-6">
-					{{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Prénom', 'required': 'required'}}) }}
-				</div>
-				<div class="col-md-6">
-					{{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Nom', 'required': 'required'}}) }}
-				</div>
-			</div>
-			<br>
-
-			{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email', 'required': 'required', 'type': 'email'}}) }}
-			<br>
-			{{ form_row(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message', 'required': 'required', 'rows': 5}}) }}
-			{{ form_row(form.submit, {'attr': {'class': 'btn btn-voir-fiche-produit btn-lg btn-block my-4'}}) }}
-			{{ form_end(form) }}
-
-		</div>
+		{% include "include/formContact.html.twig" %}
 	</div>
 {% endblock %}

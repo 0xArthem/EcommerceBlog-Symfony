@@ -15,10 +15,11 @@
 			</h5>
 		{% endif %}
 
+
 		<h1 class="text-center">
 			{{ product.name }}
 			<i class="fas fa-seedling mx-1"></i>
-			{% if product.lastPrice %}
+			{% if product.lastPrice != 0 %}
 				<span class="last-price-carte-produit">{{ product.lastPrice }}&euro;</span>
 			{% endif %}
 			{{ product.price }}&euro;

@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleCategoryRepository;
+use App\Entity\Contact;
+use App\Form\ContactType;
+use App\Controller\ContactController;
 use App\Repository\ArticleRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\ArticleCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
